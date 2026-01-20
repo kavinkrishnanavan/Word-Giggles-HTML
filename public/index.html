@@ -3,24 +3,99 @@
 <head>
   <meta charset="UTF-8" />
   <title>Word-Giggles</title>
-</head>
-<body>
   <style>
+    /* CSS Variables for Light and Dark Mode */
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #333333;
+      --input-bg: #f0f0f0;
+      --input-text: #000000;
+      --button-bg: #007bff;
+      --button-text: #ffffff;
+      --header-color: #333333;
+    }
+
+    body.dark {
+      --bg-color: #1e1e1e;
+      --text-color: #f0f0f0;
+      --input-bg: #333333;
+      --input-text: #ffffff;
+      --button-bg: #0d6efd;
+      --button-text: #ffffff;
+      --header-color: #f0f0f0;
+    }
+
     body {
       font-family: Arial, sans-serif;
       max-width: 800px;
       margin: auto;
       padding: 20px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
     }
+
     input, button {
       padding: 10px;
       margin: 5px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
     }
-    h1, h2, h4 {
-      color: #333;
+
+    input {
+      background-color: var(--input-bg);
+      color: var(--input-text);
     }
+
+    button {
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    #title {
+      color: var(--header-color);
+      font-size: 300%;
+      margin-top: 1%;
+      
+    }
+
+    #logo {
+      height: 100px;
+      border-radius: 25%;
+      transition: transform 0.3s ease;
+    }
+
+    #logo:hover {
+      transform: scale(1.1);
+    }
+
+    .header {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    h2 {
+      margin-left: 2.5%;
+    }
+    h4 {
+      margin-left: 4%;
+    }
+
   </style>
-  <h1>Word - Giggles</h1>
+</head>
+<body>
+  <div class="header">
+    <img id="logo" src="logo.png" alt="Logo">
+    <h1 id="title">🆆🅾🆁🅳 🅶🅸🅶🅶🅻🅴🆂</h1>
+  </div>
 
   <input id="prompt" placeholder="Enter a word..." />
   <button id="askBtn">Make</button>
@@ -28,17 +103,25 @@
   <pre id="output"></pre>
 
   <h2 id="wt"></h2>
-
   <h4 id="word"></h4>
 
   <h2 id="mt"></h2>
-
   <h4 id="meaning"></h4>
 
   <h2 id="jt"></h2>
-
   <h4 id="joke"></h4>
 
+  <script>
+
+    function setMode() {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.body.classList.toggle('dark', prefersDark);
+    }
+
+    setMode();
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setMode);
+  </script>
 
   <script src="script.js"></script>
 </body>
