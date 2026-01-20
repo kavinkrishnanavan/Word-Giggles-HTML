@@ -12,7 +12,7 @@ button.addEventListener("click", async () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        prompt: input.value
+        prompt: "You are a childrens Joke Maker AI. Your Job is to create a joke for the word entered. The format I want the answered to be returned is in a list which is [word , meaning of word , joke]. Here is the word : " + input.value
       })
     });
 
