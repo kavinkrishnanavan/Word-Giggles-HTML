@@ -19,7 +19,8 @@ button.addEventListener("click", async () => {
     const data = await res.json();
 
     if (data.answer) {
-      output.textContent = data.answer;
+      let answer = JSON.parse(data.answer);
+      output.textContent = answer[2];
     } else {
       output.textContent = "No response";
     }
