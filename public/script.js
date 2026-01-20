@@ -6,7 +6,7 @@ const joke = document.getElementById("joke");
 const input = document.getElementById("prompt");
 
 button.addEventListener("click", async () => {
-  output.textContent = "Thinking...";
+  output.textContent = "Making...";
 
   try {
     const res = await fetch("/.netlify/functions/groq", {
@@ -23,6 +23,7 @@ button.addEventListener("click", async () => {
 
     if (data.answer) {
       let answer = JSON.parse(data.answer);
+      output.textContent = "";
       word.textContent = answer[0];
       meaning.textContent = answer[1];
       joke.textContent = answer[2];
