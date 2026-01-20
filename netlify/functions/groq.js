@@ -16,7 +16,7 @@ export const handler = async (event) => {
     }
 
     const completion = await groq.chat.completions.create({
-      model: "gpt-oss-120b",
+      model: "openai/gpt-oss-120b",
       messages: [
         { role: "user", content: prompt }
       ]
