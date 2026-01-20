@@ -1,5 +1,8 @@
 const button = document.getElementById("askBtn");
 const output = document.getElementById("output");
+const word = document.getElementById("word");
+const meaning = document.getElementById("meaning");
+const joke = document.getElementById("joke");
 const input = document.getElementById("prompt");
 
 button.addEventListener("click", async () => {
@@ -20,7 +23,9 @@ button.addEventListener("click", async () => {
 
     if (data.answer) {
       let answer = JSON.parse(data.answer);
-      output.textContent = answer[2];
+      word.textContent = answer[0];
+      meaning.textContent = answer[1];
+      joke.textContent = answer[2];
     } else {
       output.textContent = "No response";
     }
