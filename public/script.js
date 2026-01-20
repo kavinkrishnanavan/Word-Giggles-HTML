@@ -3,6 +3,9 @@ const output = document.getElementById("output");
 const word = document.getElementById("word");
 const meaning = document.getElementById("meaning");
 const joke = document.getElementById("joke");
+const wt = document.getElementById("wt");
+const mt = document.getElementById("mt");
+const jt = document.getElementById("jt");
 const input = document.getElementById("prompt");
 
 button.addEventListener("click", async () => {
@@ -27,6 +30,9 @@ button.addEventListener("click", async () => {
       word.textContent = answer[0];
       meaning.textContent = answer[1];
       joke.textContent = answer[2];
+      wt.textContent = "Word";
+      mt.textContent = "Meaning";
+      jt.textContent = "Joke";
     } else {
       output.textContent = "No response";
     }
