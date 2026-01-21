@@ -18,24 +18,35 @@ export const handler = async (event) => {
       `https://api.giphy.com/v1/gifs/search` +
       `?api_key=${apiKey}` +
       `&q=${encodeURIComponent(query)}` +
-      `&limit=1&rating=g`;
+      `&limit=30&rating=g`;
 
     const response = await fetch(url);
     const data = await response.json();
 
-    const gifUrl = data?.data?.[0]?.images?.original?.url;
+    // ✅ Allow small tolerance (recommended)
+    const tolerance = 0.05; // 5%
 
-    if (!gifUrl) {
+    const squareGif = data.data.find(gif => {
+      const w = Number(gif.images.original.width);
+      const h = Number(gif.images.original.height);
+      return Math.abs(w / h - 1) <= tolerance;
+    });
+
+    if (!squareGif) {
       return {
         statusCode: 404,
-        body: JSON.stringify({ error: "No GIF found" })
+        body: JSON.stringify({ error: "No square GIF found" })
       };
     }
 
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ gif: gifUrl })
+      body: JSON.stringify({
+        gif: squareGif.images.original.url,
+        width: squareGif.images.original.width,
+        height: squareGif.images.original.height
+      })
     };
 
   } catch (err) {
