@@ -7,6 +7,9 @@ const wt = document.getElementById("wt");
 const mt = document.getElementById("mt");
 const jt = document.getElementById("jt");
 const input = document.getElementById("prompt");
+const gifBtn = document.getElementById("gifBtn");
+const gifInput = document.getElementById("gifInput");
+const gifImg = document.getElementById("gif");
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -44,5 +47,33 @@ button.addEventListener("click", async () => {
   } catch (err) {
     console.error(err);
     output.textContent = "The use of Inappropiate and Vulgar Words are not Permitted ! ";
+  }
+});
+
+gifBtn.addEventListener("click", async () => {
+  const query = gifInput.value.trim();
+  if (!query) return;
+
+  gifImg.style.display = "none";
+
+  try {
+    const res = await fetch("/.netlify/functions/giphy", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query })
+    });
+
+    const data = await res.json();
+
+    if (data.gif) {
+      gifImg.src = data.gif;
+      gifImg.style.display = "block";
+    } else {
+      alert(data.error || "No GIF found");
+    }
+
+  } catch (err) {
+    console.error(err);
+    alert("Failed to load GIF");
   }
 });
