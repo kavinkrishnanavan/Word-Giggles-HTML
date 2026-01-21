@@ -24,7 +24,7 @@ button.addEventListener("click", async () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        prompt: "You are a childrens Joke Maker AI. Your Job is to create a joke for the word entered. If the word doesn't exist, tell this Wrong Word. The format I want the answered to be returned is in a list which is [word , meaning of word , joke] (only if the word has a correct spelling). Remember to return it in a proper list with the things inside it being a string and the meaning should be short and concise. Here is the word : " + input.value
+        prompt: "You are a childrens Joke Maker AI. Your Job is to create a joke for the word entered. If the word doesn't exist, tell this Wrong Word. The format I want the answered to be returned is in a list which is [word , meaning of word , joke] (only if the word has a correct spelling). Remember to return it in a proper list with the things inside it being a string and the meaning should be short and concise in less 12 words. Here is the word : " + input.value
       })
     });
 
