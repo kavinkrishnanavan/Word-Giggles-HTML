@@ -30,6 +30,8 @@ button.addEventListener("click", async () => {
 
     const data = await res.json();
 
+    console.log(data.answer)
+
     if (data.answer) {
       let answer = JSON.parse(data.answer);
       output.textContent = "";
