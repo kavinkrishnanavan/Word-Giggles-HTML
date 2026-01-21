@@ -11,7 +11,7 @@ const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
 
 const Gifs = {
-  prerequisite: "https://tenor.com/view/before-we-begin-emma-engvid-start-meeting-gif-25084562"
+  prerequisite: "https://media1.tenor.com/m/-koXelHpdokAAAAd/before-we-begin-emma.gif"
 };
 
 function capitalize(str) {
