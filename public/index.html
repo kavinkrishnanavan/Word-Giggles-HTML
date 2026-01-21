@@ -101,15 +101,9 @@
       border-radius: 10%;
       width: 200px; 
       height: 200px;
-      object-fit: cover;   /* crops */
-      object-position: center;
+      clip-path: inset(0);
     }
 
-    #gifholder {
-      width: 200px; 
-      height: 200px;
-      overflow: hidden;  /* ensures cropping */
-    }
 
   </style>
 </head>
@@ -123,9 +117,9 @@
 
     <input id="prompt" placeholder="Enter a word..." />
     <button id="askBtn">Make</button>
-    <div id="gifholder">
-      <img id="gif"/>
-    </div>
+    
+    <img id="gif"/>
+
 
   </div>
 
