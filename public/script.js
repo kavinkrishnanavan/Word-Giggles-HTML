@@ -29,11 +29,7 @@ button.addEventListener("click", async () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        prompt:
-          "You are a childrens Joke Maker AI. Your Job is to create a joke for the word entered. " +
-          "If the word doesn't exist, tell this Wrong Word. The format I want is " +
-          "[word , meaning of word , joke] (Except when the word is wrong). Remember the Format should be a proper javascript list with the things inside it in string type and the Meaning must be under 12 words. Word: " +
-          input.value
+        prompt: "You are a childrens Joke Maker AI. Your Job is to create a joke for the word entered. If the word doesn't exist, tell this Wrong Word. The format I want the answered to be returned is in a list which is [word , meaning of word , joke] (only if the word has a correct spelling). Remember to return it in a proper list with the things inside it being a string and the meaning should be short and concise in less 12 words. Here is the word : " + input.value
       }) 
     });
 
