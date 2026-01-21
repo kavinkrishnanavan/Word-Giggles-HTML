@@ -8,6 +8,10 @@ const mt = document.getElementById("mt");
 const jt = document.getElementById("jt");
 const input = document.getElementById("prompt");
 
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
 button.addEventListener("click", async () => {
   output.textContent = "Making...";
 
@@ -27,9 +31,9 @@ button.addEventListener("click", async () => {
     if (data.answer) {
       let answer = JSON.parse(data.answer);
       output.textContent = "";
-      word.textContent = answer[0];
-      meaning.textContent = answer[1];
-      joke.textContent = answer[2];
+      word.textContent = capitalize(answer[0]);
+      meaning.textContent = capitalize(answer[1]);
+      joke.textContent = capitalize(answer[2]);
       wt.textContent = "Word";
       mt.textContent = "Meaning";
       jt.textContent = "Joke";
