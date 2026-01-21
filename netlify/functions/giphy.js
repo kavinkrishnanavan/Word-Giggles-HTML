@@ -18,7 +18,7 @@ export const handler = async (event) => {
       `https://api.giphy.com/v1/gifs/search` +
       `?api_key=${apiKey}` +
       `&q=${encodeURIComponent(query)}` +
-      `&limit=30&rating=g`;
+      `&limit=100&rating=g`;
 
     const response = await fetch(url);
     const data = await response.json();
@@ -35,7 +35,7 @@ export const handler = async (event) => {
     if (!squareGif) {
       return {
         statusCode: 404,
-        body: JSON.stringify({ error: "No square GIF found" })
+        body: JSON.stringify({ error: "No GIF found" })
       };
     }
 

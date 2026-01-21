@@ -2,7 +2,8 @@ const button = document.getElementById("askBtn");
 const output = document.getElementById("output");
 const word = document.getElementById("word");
 const meaning = document.getElementById("meaning");
-const joke = document.getElementById("joke");
+const one = document.getElementById("joke1");
+const two = document.getElementById("joke2");
 const wt = document.getElementById("wt");
 const mt = document.getElementById("mt");
 const jt = document.getElementById("jt");
@@ -34,7 +35,9 @@ button.addEventListener("click", async () => {
       output.textContent = "";
       word.textContent = capitalize(answer[0]);
       meaning.textContent = capitalize(answer[1]);
-      joke.textContent = capitalize(answer[2]);
+      let joke = answer[2].split(/([.!?])\s+/);
+      one.textContent = capitalize(joke[0]);
+      two.textContent = capitalize(joke[1]);
       wt.textContent = "Word";
       mt.textContent = "Meaning";
       jt.textContent = "Joke";
@@ -56,20 +59,20 @@ button.addEventListener("click", async () => {
           gifImg.src = data.gif;
           gifImg.style.display = "block";
         } else {
-          alert(data.error || "No GIF found");
+          //alert(data.error || "No GIF found");
         }
 
       } catch (err) {
         console.error(err);
-        alert("Failed to load GIF");
+        //alert("Failed to load GIF");
       }
     } else {
-      output.textContent = "No response";
+      output.textContent = "Please Try again or Recheck your spelling !";
     }
 
   } catch (err) {
     console.error(err);
-    output.textContent = "The use of Inappropiate and Vulgar Words are not Permitted ! ";
+    output.textContent = "Please Try again or Recheck your spelling !";
   }
 });
 
