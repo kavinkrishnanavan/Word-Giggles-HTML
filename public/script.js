@@ -10,6 +10,13 @@ const jt = document.getElementById("jt");
 const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
 
+const Gifs = {
+  prerequisite: "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",
+  happy: "https://media.giphy.com/media/111ebonMs90YLu/giphy.gif",
+  joke: "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif",
+  school: "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"
+};
+
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
@@ -20,59 +27,65 @@ button.addEventListener("click", async () => {
   try {
     const res = await fetch("/.netlify/functions/groq", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        prompt: "You are a childrens Joke Maker AI. Your Job is to create a joke for the word entered. If the word doesn't exist, tell this Wrong Word. The format I want the answered to be returned is in a list which is [word , meaning of word , joke] (only if the word has a correct spelling). Remember to return it in a proper list with the things inside it being a string and the meaning should be short and concise in less 12 words. Here is the word : " + input.value
-      })
+        prompt:
+          "You are a childrens Joke Maker AI. Your Job is to create a joke for the word entered. " +
+          "If the word doesn't exist, tell this Wrong Word. The format I want is " +
+          "[word , meaning of word , joke] (Except when the word is wrong). Meaning must be under 12 words. Word: " +
+          input.value
+      }) 
     });
 
     const data = await res.json();
 
-    if (data.answer) {
-      let answer = JSON.parse(data.answer);
-      output.textContent = "";
-      word.textContent = capitalize(answer[0]);
-      meaning.textContent = capitalize(answer[1]);
-      let joke = answer[2].match(/[^.!?]+[.!?]/g);
-      one.textContent = capitalize(joke[0].trim());
-      two.textContent = capitalize(joke[1].trim());
-      wt.textContent = "Word";
-      mt.textContent = "Meaning";
-      jt.textContent = "Joke";
-      const query = input.value.trim();
-      if (!query) return;
+    if (!data.answer) {
+      output.textContent = "Please Try again or Recheck your spelling !";
+      return;
+    }
 
+    const answer = JSON.parse(data.answer);
+
+    output.textContent = "";
+    word.textContent = capitalize(answer[0]);
+    meaning.textContent = capitalize(answer[1]);
+
+    const joke = answer[2].match(/[^.!?]+[.!?]/g);
+    one.textContent = capitalize(joke[0].trim());
+    two.textContent = capitalize(joke[1].trim());
+
+    wt.textContent = "Word";
+    mt.textContent = "Meaning";
+    jt.textContent = "Joke";
+
+    const query = input.value.trim();
+    if (!query) return;
+
+    if (Gifs[query]) {
+      gifImg.src = Gifs[query];
+      gifImg.style.display = "block";
+    } else {
       gifImg.style.display = "none";
 
       try {
-        const res = await fetch("/.netlify/functions/giphy", {
+        const gifRes = await fetch("/.netlify/functions/giphy", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ query })
         });
 
-        const data = await res.json();
+        const gifData = await gifRes.json();
 
-        if (data.gif) {
-          gifImg.src = data.gif;
+        if (gifData.gif) {
+          gifImg.src = gifData.gif;
           gifImg.style.display = "block";
-        } else {
-          //alert(data.error || "No GIF found");
         }
-
       } catch (err) {
         console.error(err);
-        //alert("Failed to load GIF");
       }
-    } else {
-      output.textContent = "Please Try again or Recheck your spelling !";
     }
-
   } catch (err) {
     console.error(err);
     output.textContent = "Please Try again or Recheck your spelling !";
   }
 });
-
