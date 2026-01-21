@@ -51,7 +51,7 @@ button.addEventListener("click", async () => {
     mt.textContent = "Meaning";
     jt.textContent = "Joke";
 
-    const query = input.value.trim();
+    const query = input.value.trim().toLowerCase();;
     if (!query) return;
 
     if (Gifs[query]) {
