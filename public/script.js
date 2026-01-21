@@ -32,7 +32,7 @@ button.addEventListener("click", async () => {
         prompt:
           "You are a childrens Joke Maker AI. Your Job is to create a joke for the word entered. " +
           "If the word doesn't exist, tell this Wrong Word. The format I want is " +
-          "[word , meaning of word , joke] (Except when the word is wrong). Meaning must be under 12 words. Word: " +
+          "[word , meaning of word , joke] (Except when the word is wrong). Remember the Format should be a proper javascript list with the things inside it in string type and the Meaning must be under 12 words. Word: " +
           input.value
       }) 
     });
