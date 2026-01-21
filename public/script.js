@@ -11,10 +11,7 @@ const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
 
 const Gifs = {
-  prerequisite: "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",
-  happy: "https://media.giphy.com/media/111ebonMs90YLu/giphy.gif",
-  joke: "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif",
-  school: "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"
+  prerequisite: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjVzNXI0eTV2YXRlbTlscW83ZTM2Ymh6dTk1dWE4dm03YWd3bmpnMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/X8Q6NGclkEIUfgkqnS/giphy.gif"
 };
 
 function capitalize(str) {
