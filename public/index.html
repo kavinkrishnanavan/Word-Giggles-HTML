@@ -96,14 +96,18 @@
       margin-left: 2.5%;
     }
 
-    #gif {
+    body[data-layout="desktop"] #gif {
       margin-left: 45%;
       margin-top: 22.5%;
       border-radius: 10%;
-      
       height: 300px;
       position: absolute;
+    }
 
+
+    body[data-layout="mobile"] #gif {
+      border-radius: 10%;
+      height: 300px;
     }
 
 
@@ -149,6 +153,17 @@
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setMode);
   </script>
 
+  <script>
+    function setLayout() {
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      document.body.dataset.layout = isMobile ? "mobile" : "desktop";
+    }
+    setLayout();
+    window.addEventListener("resize", setLayout);
+  </script>
+
+
   <script src="script.js"></script>
+
 </body>
 </html>
