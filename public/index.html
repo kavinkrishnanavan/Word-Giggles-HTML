@@ -96,21 +96,6 @@
       margin-left: 2.5%;
     }
 
-    body[data-layout="desktop"] #gif {
-      margin-left: 45%;
-      margin-top: 22.5%;
-      border-radius: 10%;
-      height: 300px;
-      position: absolute;
-    }
-
-
-    body[data-layout="mobile"] #gif {
-      border-radius: 10%;
-      height: 300px;
-    }
-
-
   </style>
 </head>
 <body>
@@ -123,8 +108,8 @@
 
     <input id="prompt" placeholder="Enter a word..." />
     <button id="askBtn">Make</button>
-    
-    <img id="cgif"/>
+
+    <img id="cgif" style="margin-left: 45%; margin-top: 22.5%; border-radius: 10%; height: 300px; position: absolute;"/>
 
   </div>
 
@@ -142,7 +127,7 @@
   <h4 id="joke1"></h4>
   <h4 id="joke2"></h4>
 
-  <img id="mgif"/>
+  <img id="mgif" style="border-radius: 10%; height: 300px;"/>
 
   <script>
 
