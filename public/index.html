@@ -144,7 +144,7 @@
   <script>
     const computer = document.getElementById("cgif");
     const mobile = document.getElementById("mgif");
-    //const body = document.getElementById("body");
+    const body = document.getElementById("body");
 
     function isMobileDevice() {
       return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -155,11 +155,12 @@
         console.log("Mobile Layout");
         mobile.id = "gif";
         computer.id = "cgif";
-        //body.style = "transform: scale(1.5); transform-origin: top left;"
+        body.style = "transform: scale(1.5); transform-origin: top left;"
       } else {
         console.log("Desktop Layout");
         computer.id = "gif";
         mobile.id = "mgif";
+        body.style = "overflow: hidden;"
       }
     }
 
