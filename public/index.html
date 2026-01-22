@@ -98,7 +98,7 @@
 
   </style>
 </head>
-<body>
+<body id="body">
   <div class="header">
     <img id="logo" src="logo.png" alt="Logo">
     <h1 id="title">𝐖𝐨𝐫𝐝 𝐆𝐢𝐠𝐠𝐥𝐞𝐬</h1>
@@ -144,6 +144,7 @@
   <script>
     const computer = document.getElementById("cgif");
     const mobile = document.getElementById("mgif");
+    const body = document.getElementById("body");
 
     function isMobileDevice() {
       return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -154,6 +155,7 @@
         console.log("Mobile Layout");
         mobile.id = "gif";
         computer.id = "cgif";
+        body.style = "transform: scale(1.5); transform-origin: top left;"
       } else {
         console.log("Desktop Layout");
         computer.id = "gif";
