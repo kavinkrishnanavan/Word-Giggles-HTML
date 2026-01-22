@@ -145,19 +145,22 @@
     const computer = document.getElementById("cgif");
     const mobile = document.getElementById("mgif");
 
-    function setLayout() {
-      const isMobile = window.matchMedia("(max-width: 768px)").matches;
-      document.body.dataset.layout = isMobile ? "mobile" : "desktop";
+    function isMobileDevice() {
+      return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
 
-      if (isMobile) {
-        
-        console.log("Desktop Layout");
-        computer.id = "gif";
-      } else {
+    function setLayout() {
+      if (isMobileDevice()) {
         console.log("Mobile Layout");
         mobile.id = "gif";
+        computer.id = "cgif";
+      } else {
+        console.log("Desktop Layout");
+        computer.id = "gif";
+        mobile.id = "mgif";
       }
     }
+
 
     setLayout();
     window.addEventListener("resize", setLayout);
