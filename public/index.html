@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <title>Word-Giggles</title>
   <link rel="icon" type="image/png" href="logo.png">
-  <style>
 
+  <style>
     :root {
       --bg-color: #ffffff;
       --text-color: #333333;
@@ -28,7 +28,7 @@
 
     body {
       font-family: Arial, sans-serif;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
       padding: 20px;
       background-color: var(--bg-color);
@@ -37,10 +37,10 @@
     }
 
     input, button {
-      padding: 10px;
+      padding: 12px;
       margin: 5px;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 16px;
     }
 
@@ -53,23 +53,10 @@
       background-color: var(--button-bg);
       color: var(--button-text);
       cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
-
-    #title {
-      color: var(--header-color);
-      font-size: 300%;
-      margin-top: 3%;
-      
     }
 
     #logo {
-      height: 100px;
-
+      height: 90px;
       transition: transform 0.3s ease;
     }
 
@@ -77,76 +64,145 @@
       transform: scale(1.1);
     }
 
+    #title {
+      font-size: 280%;
+      color: var(--header-color);
+    }
+
     .header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .input-row {
       display: flex;
       gap: 10px;
       align-items: center;
-    }
-
-    h2 {
-      margin-left: 2.5%;
-      font-style: italic;
-    }
-    h4 {
-      margin-left: 4%;
-      
-    }
-
-    #output {
-      margin-left: 2.5%;
+      margin-top: 20px;
     }
 
     #gif {
-      margin-left: 45%;
-      margin-top: 22.5%;
-      border-radius: 10%;
-      
-      height: 300px;
-      position: absolute;
-
+      border-radius: 12px;
+      transition: all 0.3s ease;
     }
 
+    h2 {
+      font-style: italic;
+      text-decoration: underline;
+    }
 
+    /* ========================= */
+    /* 🖥 DESKTOP INTERFACE */
+    /* ========================= */
+    body[data-layout="desktop"] .header {
+      flex-direction: row;
+    }
+
+    body[data-layout="desktop"] .input-row {
+      flex-direction: row;
+    }
+
+    body[data-layout="desktop"] #gif {
+      position: absolute;
+      right: 5%;
+      top: 30%;
+      height: 300px;
+    }
+
+    body[data-layout="desktop"] h2,
+    body[data-layout="desktop"] h4,
+    body[data-layout="desktop"] #output {
+      margin-left: 2.5%;
+      text-align: left;
+    }
+
+    /* ========================= */
+    /* 📱 MOBILE INTERFACE */
+    /* ========================= */
+    body[data-layout="mobile"] {
+      max-width: 100%;
+      padding: 15px;
+    }
+
+    body[data-layout="mobile"] .header {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    body[data-layout="mobile"] #title {
+      font-size: 220%;
+    }
+
+    body[data-layout="mobile"] .input-row {
+      flex-direction: column;
+    }
+
+    body[data-layout="mobile"] input,
+    body[data-layout="mobile"] button {
+      width: 100%;
+      font-size: 18px;
+    }
+
+    body[data-layout="mobile"] #gif {
+      position: relative;
+      height: 200px;
+      margin: 25px auto;
+      display: block;
+    }
+
+    body[data-layout="mobile"] h2,
+    body[data-layout="mobile"] h4,
+    body[data-layout="mobile"] #output {
+      margin-left: 0;
+      text-align: center;
+    }
   </style>
 </head>
+
 <body>
+
   <div class="header">
     <img id="logo" src="logo.png" alt="Logo">
     <h1 id="title">𝐖𝐨𝐫𝐝 𝐆𝐢𝐠𝐠𝐥𝐞𝐬</h1>
   </div>
 
-  <div class="header">
-
+  <div class="input-row">
     <input id="prompt" placeholder="Enter a word..." />
     <button id="askBtn">Make</button>
-    
-    <img id="gif"/>
-
-
+    <img id="gif" />
   </div>
 
   <pre id="output"></pre>
 
-  <h2 id="wt" style="text-decoration: underline;"></h2>
+  <h2 id="wt"></h2>
   <h4 id="word"></h4>
 
-  <h2 id="mt" style="text-decoration: underline;"></h2>
+  <h2 id="mt"></h2>
   <h4 id="meaning"></h4>
 
-  <h2 id="jt" style="text-decoration: underline;"></h2>
+  <h2 id="jt"></h2>
   <h4 id="joke1"></h4>
   <h4 id="joke2"></h4>
 
+  <!-- 🌗 DARK MODE -->
   <script>
-
     function setMode() {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       document.body.classList.toggle('dark', prefersDark);
     }
-
     setMode();
-
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setMode);
+  </script>
+
+  <!-- 📱🖥 INTERFACE SWITCH -->
+  <script>
+    function setLayout() {
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      document.body.dataset.layout = isMobile ? "mobile" : "desktop";
+    }
+    setLayout();
+    window.addEventListener("resize", setLayout);
   </script>
 
   <script src="script.js"></script>
