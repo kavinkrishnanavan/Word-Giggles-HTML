@@ -124,11 +124,11 @@
     <input id="prompt" placeholder="Enter a word..." />
     <button id="askBtn">Make</button>
     
-    
+    <img id="cgif"/>
 
   </div>
 
-  <img id="gif"/>
+  
 
   <pre id="output"></pre>
 
@@ -141,6 +141,8 @@
   <h2 id="jt" style="text-decoration: underline;"></h2>
   <h4 id="joke1"></h4>
   <h4 id="joke2"></h4>
+
+  <img id="mgif"/>
 
   <script>
 
@@ -158,6 +160,14 @@
     function setLayout() {
       const isMobile = window.matchMedia("(max-width: 768px)").matches;
       document.body.dataset.layout = isMobile ? "mobile" : "desktop";
+      if (isMobile ? "mobile" : "desktop" == "mobile") {
+
+        console.log("Mobile Layout")
+
+      } else {
+
+        console.log("Desktop Layout")
+      }
     }
     setLayout();
     window.addEventListener("resize", setLayout);
