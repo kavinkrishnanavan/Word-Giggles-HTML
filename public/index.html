@@ -127,7 +127,7 @@
   <h4 id="joke1"></h4>
   <h4 id="joke2"></h4>
 
-  <img id="mgif" style="border-radius: 10%; height: 300px;"/>
+  <img id="mgif" style="border-radius: 10%; height: 300px; margin-left: 2.5%;"/>
 
   <script>
 
@@ -150,11 +150,12 @@
       document.body.dataset.layout = isMobile ? "mobile" : "desktop";
 
       if (isMobile) {
-        console.log("Mobile Layout");
-        mobile.id = "gif";
-      } else {
+        
         console.log("Desktop Layout");
         computer.id = "gif";
+      } else {
+        console.log("Mobile Layout");
+        mobile.id = "gif";
       }
     }
 
