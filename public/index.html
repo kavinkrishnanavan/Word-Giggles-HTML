@@ -98,16 +98,19 @@
     }
 
     #banner {
-      position: fixed; /* Stays in place even when scrolling */
+      position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      
+
       text-align: center;
-      padding: 1px 0;
+      padding: 10px 5px;
       font-size: 14px;
-      box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.3);
       z-index: 1000;
+
+      /* Mobile safe area support */
+      padding-bottom: calc(10px + env(safe-area-inset-bottom));
     }
 
   </style>
