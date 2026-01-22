@@ -148,18 +148,16 @@
     function setLayout() {
       const isMobile = window.matchMedia("(max-width: 768px)").matches;
       document.body.dataset.layout = isMobile ? "mobile" : "desktop";
-      if (isMobile ? "mobile" : "desktop" == "mobile") {
 
-        console.log("Desktop Layout");
-        computer.id = "gif";
-
-      } else {
-
+      if (isMobile) {
         console.log("Mobile Layout");
         mobile.id = "gif";
-        
+      } else {
+        console.log("Desktop Layout");
+        computer.id = "gif";
       }
     }
+
     setLayout();
     window.addEventListener("resize", setLayout);
   </script>
