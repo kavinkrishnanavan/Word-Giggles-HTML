@@ -1,3 +1,5 @@
+import fetch from "node-fetch";
+
 export async function handler(event) {
   try {
     const { text } = JSON.parse(event.body || "{}");
@@ -17,7 +19,7 @@ export async function handler(event) {
       },
       body: JSON.stringify({
         model: "canopylabs/orpheus-v1-english",
-        voice: "troy", // 👈 default voice
+        voice: "troy",
         input: text,
         response_format: "wav"
       })
@@ -25,10 +27,10 @@ export async function handler(event) {
 
     if (!response.ok) {
       const error = await response.text();
-      console.error(error);
+      console.error("Groq error:", error);
       return {
         statusCode: 500,
-        body: "Groq TTS failed"
+        body: error
       };
     }
 
@@ -43,10 +45,10 @@ export async function handler(event) {
       isBase64Encoded: true
     };
   } catch (err) {
-    console.error(err);
+    console.error("Function error:", err);
     return {
       statusCode: 500,
-      body: "Server error"
+      body: err.message
     };
   }
 }
