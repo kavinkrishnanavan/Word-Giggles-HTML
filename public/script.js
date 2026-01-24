@@ -59,7 +59,33 @@ button.addEventListener("click", async () => {
     jt.textContent = "Joke";
     
 
-    const query = input.value.trim().toLowerCase();;
+    const query = input.value.trim().toLowerCase();
+
+    const text = "Word: " + answer[0] + ". Meaning: " + answer[1] + ". Joke: " + answer[2];
+          
+    if (!text) return;
+
+    try {
+      const res = await fetch("/.netlify/functions/tts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ text })
+        });
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+
+      audio.src = url;
+      audio.play();
+    } catch (err) {
+      console.error(err);
+      console.log("Text-to-speech failed");
+    } finally {
+      // Do Nothing
+    }
+
     if (!query) return;
 
     if (Gifs[query]) {
@@ -80,31 +106,7 @@ button.addEventListener("click", async () => {
         if (gifData.gif) {
           gifImg.src = gifData.gif;
           gifImg.style.display = "block";
-          console.log(answer)
-          const text = "Word: " + answer[0] + ". Meaning: " + answer[1] + ". Joke: " + answer[2];
           
-          if (!text) return;
-
-          try {
-            const res = await fetch("/.netlify/functions/tts", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({ text })
-            });
-
-            const blob = await res.blob();
-            const url = URL.createObjectURL(blob);
-
-            audio.src = url;
-            audio.play();
-          } catch (err) {
-            console.error(err);
-            console.log("Text-to-speech failed");
-          } finally {
-            // Do Nothing
-          }
         }
       } catch (err) {
         console.error(err);
