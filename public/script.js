@@ -13,13 +13,11 @@ const Gifs = {
   prerequisite: "https://media1.tenor.com/m/-koXelHpdokAAAAd/before-we-begin-emma.gif",
   modesty: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTdxbGYzemxkMzg5MGs0b2NleXFvd3BoemExZTRhcnRrNmYwdWM2NSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qN9KLSKynX1bNqNzFY/giphy.gif"
 };
-
 const speakBtn = document.getElementById("speak");
 const audio = document.getElementById("audio");
-const textInput = document.getElementById("text");
 
 speakBtn.addEventListener("click", async () => {
-  const text = textInput.value.trim();
+  const text = input.value.trim();
   if (!text) return;
 
   speakBtn.disabled = true;
@@ -85,6 +83,7 @@ button.addEventListener("click", async () => {
     wt.textContent = "Word";
     mt.textContent = "Meaning";
     jt.textContent = "Joke";
+    speakBtn.click();
 
     const query = input.value.trim().toLowerCase();;
     if (!query) return;
