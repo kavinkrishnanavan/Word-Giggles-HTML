@@ -11,7 +11,10 @@ const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
 const Gifs = {
   prerequisite: "https://media1.tenor.com/m/-koXelHpdokAAAAd/before-we-begin-emma.gif",
-  modesty: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTdxbGYzemxkMzg5MGs0b2NleXFvd3BoemExZTRhcnRrNmYwdWM2NSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qN9KLSKynX1bNqNzFY/giphy.gif"
+  modesty: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTdxbGYzemxkMzg5MGs0b2NleXFvd3BoemExZTRhcnRrNmYwdWM2NSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qN9KLSKynX1bNqNzFY/giphy.gif",
+  tow: "https://media1.tenor.com/m/6sh061JnoIMAAAAd/tiny-car-custom-trailer.gif",
+  poop: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjZ2Z3c3ZDB1d2sxaTA1dXh5eDI1Y25kZGNmanhvYjh3YnptbGtrMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WFAlxdc7O5IIg/giphy.gif",
+  car: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGt0ODF2dTlvcjUyeTRnMnY2a2h5OWhobTB0NzByNDdycnFnaW9iYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ov9jWu7BuHufyLs7m/giphy.gif"
 };
 
 const audio = document.getElementById("audio");
@@ -100,8 +103,7 @@ button.addEventListener("click", async () => {
             console.error(err);
             console.log("Text-to-speech failed");
           } finally {
-            speakBtn.disabled = false;
-            speakBtn.textContent = "Speak";
+            // Do Nothing
           }
         }
       } catch (err) {
