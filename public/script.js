@@ -61,7 +61,7 @@ button.addEventListener("click", async () => {
 
     const query = input.value.trim().toLowerCase();
 
-    const text = "Word: " + answer[0] + ". Meaning: " + answer[1] + ". Joke: " + answer[2];
+    const text = "[cheerful]" + "Word: " + answer[0] + ". Meaning: " + answer[1] + ". Joke: " + answer[2];
           
     if (!text) return;
 
