@@ -17,7 +17,7 @@ const speakBtn = document.getElementById("speak");
 const audio = document.getElementById("audio");
 
 speakBtn.addEventListener("click", async () => {
-  const text = input.value.trim();
+  const text = "Word: " + answer[0] + ". Meaning: " + answer[1] + "Joke: " + answer[2];
   if (!text) return;
 
   speakBtn.disabled = true;
