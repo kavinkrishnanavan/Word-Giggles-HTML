@@ -17,7 +17,9 @@ const speakBtn = document.getElementById("speak");
 const audio = document.getElementById("audio");
 
 speakBtn.addEventListener("click", async () => {
-  const text = "Word: " + answer[0] + ". Meaning: " + answer[1] + "Joke: " + answer[2];
+  console.log(answer)
+  const text = "Word: " + answer[0] + ". Meaning: " + answer[1] + ". Joke: " + answer[2];
+  
   if (!text) return;
 
   speakBtn.disabled = true;
@@ -39,7 +41,7 @@ speakBtn.addEventListener("click", async () => {
     audio.play();
   } catch (err) {
     console.error(err);
-    alert("Text-to-speech failed");
+    console.log("Text-to-speech failed");
   } finally {
     speakBtn.disabled = false;
     speakBtn.textContent = "Speak";
