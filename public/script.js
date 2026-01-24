@@ -82,9 +82,6 @@ button.addEventListener("click", async () => {
           
           if (!text) return;
 
-          speakBtn.disabled = true;
-          speakBtn.textContent = "Speaking...";
-
           try {
             const res = await fetch("/.netlify/functions/tts", {
               method: "POST",
