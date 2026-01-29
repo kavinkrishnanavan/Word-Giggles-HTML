@@ -25,7 +25,7 @@ function capitalize(str) {
 }
 
 speak.addEventListener('click', async function() {
-    const text = "[cheerful] Word: " + answer[0] + ". Meaning: " + answer[1] + ". Joke: " + answer[2];
+    const text = "[cheerful] Word: " + word.textContent + ". Meaning: " + meaning.textContent + ". Joke: " + one.textContent + two.textContent;
     
     if (!text) return;
 
