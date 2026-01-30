@@ -25,9 +25,10 @@ function capitalize(str) {
 }
 
 speak.addEventListener('click', async function() {
+
+    if (!word.textContent) return;
+
     const text = "[cheerful] Word: " + word.textContent + ". Meaning: " + meaning.textContent + ". Joke: " + one.textContent + two.textContent;
-    
-    if (!text) return;
 
     try {
         const res = await fetch("/.netlify/functions/tts", {
