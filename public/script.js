@@ -10,6 +10,7 @@ const jt = document.getElementById("jt");
 const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
 const speak = document.getElementById("speak")
+const speakword = document.getElementById("speakword")
 const Gifs = {
   prerequisite: "https://media1.tenor.com/m/-koXelHpdokAAAAd/before-we-begin-emma.gif",
   modesty: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTdxbGYzemxkMzg5MGs0b2NleXFvd3BoemExZTRhcnRrNmYwdWM2NSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qN9KLSKynX1bNqNzFY/giphy.gif",
@@ -23,6 +24,34 @@ const audio = document.getElementById("audio");
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
+
+speakword.addEventListener('click', async function() {
+
+    if (!word.textContent) return;
+
+    const text = "[cheerful] Word: " + word.textContent;
+
+    try {
+        const res = await fetch("/.netlify/functions/tts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ text })
+        });
+
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+
+        audio.src = url;
+        audio.play();
+    } catch (err) {
+        console.error(err);
+        console.log("Text-to-speech failed");
+    } finally {
+        // Do Nothing
+    }
+});
 
 speak.addEventListener('click', async function() {
 
