@@ -9,7 +9,7 @@ const mt = document.getElementById("mt");
 const jt = document.getElementById("jt");
 const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
-const speak = document.getElementById("speak")
+const speak = document.getElementById("speakf")
 const speakword = document.getElementById("speakword")
 const Gifs = {
   prerequisite: "https://media1.tenor.com/m/-koXelHpdokAAAAd/before-we-begin-emma.gif",
@@ -29,7 +29,7 @@ speakword.addEventListener('click', async function() {
 
     if (!word.textContent) return;
 
-    const text = "[cheerful] Word: " + word.textContent;
+    const text = "[cheerful] Word. " + word.textContent;
 
     try {
         const res = await fetch("/.netlify/functions/tts", {
