@@ -31,7 +31,7 @@ function capitalize(str) {
 
 speakjoke.addEventListener('click', async function() {
 
-    
+    speakjoke.style.display = "block";
 
     const text = "[cheerful]" + one.textContent + two.textContent;
 
@@ -114,8 +114,6 @@ speakword.addEventListener('click', async function() {
 });
 
 
-
-
 button.addEventListener("click", async () => {
   output.textContent = "Making...";
 
@@ -148,11 +146,8 @@ button.addEventListener("click", async () => {
     wt.textContent = "Word";
     mt.textContent = "Meaning";
     jt.textContent = "Joke";
-    
 
     const query = input.value.trim().toLowerCase();
-
-    
 
     if (!query) return;
 
