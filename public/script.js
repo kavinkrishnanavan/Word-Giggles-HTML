@@ -9,7 +9,7 @@ const mt = document.getElementById("mt");
 const jt = document.getElementById("jt");
 const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
-const speak = document.getElementById("speakf")
+
 const speakword = document.getElementById("speakword")
 const speakmeaning = document.getElementById("speakmeaning")
 const speakjoke = document.getElementById("speakjoke")
@@ -113,33 +113,7 @@ speakword.addEventListener('click', async function() {
     }
 });
 
-speak.addEventListener('click', async function() {
 
-    if (!word.textContent) return;
-
-    const text = "[cheerful] Word. " + word.textContent + ". Meaning. " + meaning.textContent + ". Joke. " + one.textContent + two.textContent;
-
-    try {
-        const res = await fetch("/.netlify/functions/tts", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ text })
-        });
-
-        const blob = await res.blob();
-        const url = URL.createObjectURL(blob);
-
-        audio.src = url;
-        audio.play();
-    } catch (err) {
-        console.error(err);
-        console.log("Text-to-speech failed");
-    } finally {
-        // Do Nothing
-    }
-});
 
 
 button.addEventListener("click", async () => {
