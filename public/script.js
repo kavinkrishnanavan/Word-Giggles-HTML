@@ -31,7 +31,7 @@ function capitalize(str) {
 
 speakjoke.addEventListener('click', async function() {
 
-    speakjoke.style.display = "block";
+    speakjoke.style = "";
 
     const text = "[cheerful]" + one.textContent + two.textContent;
 
