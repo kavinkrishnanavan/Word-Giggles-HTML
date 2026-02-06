@@ -6,8 +6,8 @@ export async function handler(event) {
 
     if (!text) return { statusCode: 400, body: "Text is required" };
 
-    // Initialize puter.js TTS engine
-    const tts = new Putter({ voice: "alloy" }); // example voice
+    // Initialize puter.js TTS engineJ
+    const tts = new Putter({ voice: "Joanna" }); // example voice
     const audioBuffer = await tts.speak(text);  // returns ArrayBuffer or Uint8Array
 
     const buffer = Buffer.from(audioBuffer);
