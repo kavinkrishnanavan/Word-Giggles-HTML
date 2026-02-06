@@ -10,6 +10,10 @@ const jt = document.getElementById("jt");
 const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
 
+function isMobileDevice() {
+      return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 const speakword = document.getElementById("speakword")
 const speakmeaning = document.getElementById("speakmeaning")
 const speakjoke = document.getElementById("speakjoke")
@@ -171,9 +175,19 @@ button.addEventListener("click", async () => {
         const gifData = await gifRes.json();
 
         if (gifData.gif) {
-          gifImg.src = gifData.gif + "?t=" + Date.now();
-          console.log(gifData.gif)
-          gifImg.style.display = "block";
+          if (isMobileDevice()) {
+        
+            gifImg.src = gifData.mp4;
+            console.log(gifData.gif)
+            gifImg.style.display = "block";
+
+          } else {
+
+            gifImg.src = gifData.gif;
+            console.log(gifData.gif)
+            gifImg.style.display = "block";
+
+          }
           
         }
       } catch (err) {
