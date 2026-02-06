@@ -156,7 +156,7 @@ button.addEventListener("click", async () => {
 
     if (Gifs[query]) {
       gifImg.src = Gifs[query] + "?t=" + Date.now();
-      console.log(Gifs[query]);
+      
       gifImg.style.display = "block";
     } else {
       gifImg.style.display = "none";
@@ -172,6 +172,7 @@ button.addEventListener("click", async () => {
 
         if (gifData.gif) {
           gifImg.src = gifData.gif + "?t=" + Date.now();
+          console.log(gifData.gif)
           gifImg.style.display = "block";
           
         }
