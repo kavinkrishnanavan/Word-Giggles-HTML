@@ -38,28 +38,13 @@ function capitalize(str) {
 
 speakjoke.addEventListener('click', async function() {
 
-    const text = "[cheerful]" + one.textContent + two.textContent;
-
-    try {
-        const res = await fetch("/.netlify/functions/tts", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ text })
-        });
-
-        const blob = await res.blob();
-        const url = URL.createObjectURL(blob);
-
-        audio.src = url;
-        audio.play();
-    } catch (err) {
-        console.error(err);
-        console.log("Text-to-speech failed");
-    } finally {
-        // Do Nothing
-    }
+  puter.ai.txt2speech("hello", "en-US")
+                .then((audio) => {
+                    audio.play();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+  });
 });
 
 speakmeaning.addEventListener('click', async function() {
