@@ -156,6 +156,7 @@ button.addEventListener("click", async () => {
 
     if (Gifs[query]) {
       gifImg.src = Gifs[query] + "?t=" + Date.now();
+      console.log(Gifs[query])
       gifImg.style.display = "block";
     } else {
       gifImg.style.display = "none";
