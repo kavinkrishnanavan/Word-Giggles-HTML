@@ -11,30 +11,44 @@ export async function handler(event) {
       };
     }
 
-    const response = await fetch("https://api.groq.com/openai/v1/audio/speech", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        model: "canopylabs/orpheus-v1-english",
-        voice: "troy",
-        input: text,
-        response_format: "wav"
-      })
-    });
+    const deepgramKey = process.env.DEEPGRAM_API_KEY;
+    if (!deepgramKey) {
+      return {
+        statusCode: 500,
+        body: "Deepgram API key not configured"
+      };
+    }
+
+    const response = await fetch(
+      "https://api.deepgram.com/v1/text-to-speech",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Basic ${Buffer.from(
+            `${deepgramKey}:`
+          ).toString("base64")}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          text,
+          voice: "alloy",        // example voice
+          format: "wav"          // request WAV output
+        })
+      }
+    );
 
     if (!response.ok) {
       const error = await response.text();
-      console.error("Groq error:", error);
+      console.error("Deepgram error:", error);
       return {
-        statusCode: 500,
+        statusCode: response.status,
         body: error
       };
     }
 
-    const buffer = Buffer.from(await response.arrayBuffer());
+    // Deepgram returns the audio as binary
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
     return {
       statusCode: 200,
