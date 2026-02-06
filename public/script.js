@@ -184,7 +184,7 @@ button.addEventListener("click", async () => {
           } else {
 
             gifImg.src = gifData.gif;
-            console.log(gifData.gif)
+            console.log(gifData.mp4)
             gifImg.style.display = "block";
 
           }
