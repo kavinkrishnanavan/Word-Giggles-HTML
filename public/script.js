@@ -174,7 +174,7 @@ button.addEventListener("click", async () => {
 
       } else {
 
-            gifImg.src = Gifs[query].gif;
+            gifImg.src = Gifs[query];
             console.log("Preloaded Gif")
             giflink.href = Gifs[query];
             gifImg.style.display = "block";
