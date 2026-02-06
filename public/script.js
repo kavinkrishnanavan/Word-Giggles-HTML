@@ -26,7 +26,8 @@ const Gifs = {
   poop: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjZ2Z3c3ZDB1d2sxaTA1dXh5eDI1Y25kZGNmanhvYjh3YnptbGtrMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WFAlxdc7O5IIg/giphy.gif",
   car: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGt0ODF2dTlvcjUyeTRnMnY2a2h5OWhobTB0NzByNDdycnFnaW9iYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ov9jWu7BuHufyLs7m/giphy.gif",
   mercy: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHg4aXQzZzR1OWMyNzg3ajdsOTc2OGQ5ZG51Nm5hdTlsNXk1M2dhNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/9vM0xL3lihsiiAVI5o/giphy.gif",
-  clemency: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHg4aXQzZzR1OWMyNzg3ajdsOTc2OGQ5ZG51Nm5hdTlsNXk1M2dhNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/9vM0xL3lihsiiAVI5o/giphy.gif"
+  clemency: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHg4aXQzZzR1OWMyNzg3ajdsOTc2OGQ5ZG51Nm5hdTlsNXk1M2dhNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/9vM0xL3lihsiiAVI5o/giphy.gif",
+  equivocate: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWtxcGZ6M3NjeGZnaXMzcnZ1dzNrYzl2YzVreTJ2Ynl0djA2bXBxdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NgNSBCBwIELDi/giphy.gif"
 };
 
 const audio = document.getElementById("audio");
