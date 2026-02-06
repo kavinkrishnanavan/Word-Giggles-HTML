@@ -10,6 +10,7 @@ const jt = document.getElementById("jt");
 const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
 const giflink = document.getElementById("giflink")
+const mgiflink = document.getElementById("mgiflink")
 
 function isMobileDevice() {
       return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -166,7 +167,7 @@ button.addEventListener("click", async () => {
         
             gifImg.src = url;
             console.log("Preloaded gif")
-            giflink.href = url;
+            mgiflink.href = url;
             gifImg.style.display = "block";
 
       } else {
@@ -196,7 +197,7 @@ button.addEventListener("click", async () => {
         
             gifImg.src = url;
             console.log(gifData.gif)
-            giflink.href = gifData.gif;
+            mgiflink.href = gifData.gif;
             gifImg.style.display = "block";
 
           } else {
