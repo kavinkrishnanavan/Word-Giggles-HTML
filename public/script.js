@@ -182,7 +182,7 @@ button.addEventListener("click", async () => {
     }
   } catch (err) {
     console.error(err);
-    output.textContent = "Please Try again or Recheck your spelling !";
+    output.textContent = "Please Recheck your spelling or Try again!";
     
   }
 });
