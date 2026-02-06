@@ -160,9 +160,23 @@ button.addEventListener("click", async () => {
     if (!query) return;
 
     if (Gifs[query]) {
-      gifImg.src = Gifs[query] + "?t=" + Date.now();
-      
-      gifImg.style.display = "block";
+      if (isMobileDevice()) {
+
+            url = Gifs[query].slice(0, -3) + "mp4";
+        
+            gifImg.src = url;
+            console.log("Preloaded gif")
+            giflink.href = url;
+            gifImg.style.display = "block";
+
+      } else {
+
+            gifImg.src = Gifs[query].gif;
+            console.log("Preloaded Gif")
+            giflink.href = Gifs[query];
+            gifImg.style.display = "block";
+
+      }
     } else {
       gifImg.style.display = "none";
 
@@ -182,13 +196,14 @@ button.addEventListener("click", async () => {
         
             gifImg.src = url;
             console.log(gifData.gif)
+            giflink.href = gifData.gif;
             gifImg.style.display = "block";
 
           } else {
 
             gifImg.src = gifData.gif;
             console.log(gifData.gif)
-            giflink.href = gifData.gif
+            giflink.href = gifData.gif;
             gifImg.style.display = "block";
 
           }
