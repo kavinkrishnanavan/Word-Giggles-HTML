@@ -91,7 +91,7 @@ speakword.addEventListener('click', async function() {
 
     if (!word.textContent) return;
 
-    const text = "[cheerful]" + word.textContent;
+    const text = "[cheerful]. " + word.textContent;
 
     try {
         const res = await fetch("/.netlify/functions/tts", {
@@ -198,7 +198,7 @@ button.addEventListener("click", async () => {
     }
   } catch (err) {
     console.error(err);
-    output.textContent = "Please Recheck your spelling or Try again!";
+    output.textContent = "Please Try again!";
     
   }
 });
