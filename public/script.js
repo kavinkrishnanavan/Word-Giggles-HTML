@@ -124,7 +124,7 @@ button.addEventListener("click", async () => {
 
   if (isMobileDevice()) {
     gifImg.style.display = "block";
-
+  }
   try {
     const res = await fetch("/.netlify/functions/groq", {
       method: "POST",
