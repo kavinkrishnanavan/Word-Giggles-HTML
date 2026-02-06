@@ -9,6 +9,7 @@ const mt = document.getElementById("mt");
 const jt = document.getElementById("jt");
 const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
+const giflink = document.getElementById("giflink")
 
 function isMobileDevice() {
       return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -187,6 +188,7 @@ button.addEventListener("click", async () => {
 
             gifImg.src = gifData.gif;
             console.log(gifData.gif)
+            giflink.href = gifData.gif
             gifImg.style.display = "block";
 
           }
