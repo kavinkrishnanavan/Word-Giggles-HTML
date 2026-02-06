@@ -176,15 +176,17 @@ button.addEventListener("click", async () => {
 
         if (gifData.gif) {
           if (isMobileDevice()) {
+
+            url = gifData.gif.slice(0, -3) + "mp4";
         
-            gifImg.src = gifData.mp4;
+            gifImg.src = url;
             console.log(gifData.gif)
             gifImg.style.display = "block";
 
           } else {
 
             gifImg.src = gifData.gif;
-            console.log(gifData.mp4)
+            console.log(gifData.gif)
             gifImg.style.display = "block";
 
           }
