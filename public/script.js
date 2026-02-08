@@ -9,7 +9,7 @@ const mt = document.getElementById("mt");
 const jt = document.getElementById("jt");
 const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
-const giflink = document.getElementById("giflink")
+
 
 
 function isMobileDevice() {
@@ -146,7 +146,7 @@ button.addEventListener("click", async () => {
 
             gifImg.src = Gifs[query];
             console.log("Preloaded Gif")
-            giflink.href = Gifs[query];
+            
             gifImg.style.display = "block";
 
       }
@@ -176,7 +176,7 @@ button.addEventListener("click", async () => {
 
             gifImg.src = gifData.gif;
             console.log(gifData.gif)
-            giflink.href = gifData.gif;
+            
             gifImg.style.display = "block";
 
           }
