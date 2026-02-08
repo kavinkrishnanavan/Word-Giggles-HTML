@@ -101,7 +101,7 @@ button.addEventListener("click", async () => {
   output.textContent = "Making...";
 
   getSynonyms(input.value, synonyms => {
-    similiar.textContent = "Similiar" + synonyms
+    similiar.textContent = "Similiar : " + synonyms[0] + " | " + synonyms[1] + " | " + synonyms[2];
   });
   try {
     const res = await fetch("/.netlify/functions/groq", {
