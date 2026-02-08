@@ -10,7 +10,15 @@ const jt = document.getElementById("jt");
 const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
 const att = document.getElementById("att");
+const similiar = document.getElementById("similiar")
 
+async function getSynonyms(word) {
+  const res = await fetch(
+    `https://api.datamuse.com/words?rel_syn=${word}`
+  );
+  const data = await res.json();
+  return data.map(item => item.word);
+}
 
 function isMobileDevice() {
       return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -91,7 +99,7 @@ button.addEventListener("click", async () => {
   
   output.textContent = "Making...";
 
-  
+  sim_words = "Similiar : " + getSynonyms(input.value)[0] + " | " + getSynonyms(input.value)[1] + " | " + getSynonyms(input.value)[2];
   try {
     const res = await fetch("/.netlify/functions/groq", {
       method: "POST",
@@ -104,7 +112,7 @@ button.addEventListener("click", async () => {
     const data = await res.json();
 
     if (!data.answer) {
-      output.textContent = "Please Try again or Recheck your spelling !";
+      output.textContent = "Please Try again!";
       return;
     }
 
