@@ -207,41 +207,72 @@
   <script>
 (async () => {
   const sampleRate = 16000;
-  const modelUrl = "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip";
-
-  const model = await Vosk.createModel(modelUrl); // loads model
+  const modelPath = "./models/vosk-model-small-en-us-0.15"; // Local path
+  const model = await Vosk.createModel(modelPath);
   const rec = new model.Recognizer({ sampleRate });
 
   const output = document.getElementById("prompt");
   const startBtn = document.getElementById("startBtn");
 
   let micStream;
+  let audioContext;
+  let processor;
+
+  let silenceStart = null;        // Track when silence started
+  const silenceThreshold = 0.01;  // Volume threshold to detect silence
+  const silenceTime = 1500;       // 1.5 seconds of silence
 
   startBtn.onclick = async () => {
-    if (!micStream) {
-      micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const audioContext = new AudioContext({ sampleRate });
-      const source = audioContext.createMediaStreamSource(micStream);
-      const processor = audioContext.createScriptProcessor(4096, 1, 1);
+    micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    audioContext = new AudioContext({ sampleRate });
+    const source = audioContext.createMediaStreamSource(micStream);
 
-      source.connect(processor);
-      processor.connect(audioContext.destination);
+    processor = audioContext.createScriptProcessor(4096, 1, 1);
+    source.connect(processor);
+    processor.connect(audioContext.destination);
 
-      processor.onaudioprocess = (e) => {
-        const floatData = e.inputBuffer.getChannelData(0);
-        const int16Data = new Int16Array(floatData.length);
-        for (let i = 0; i < floatData.length; i++) {
-          int16Data[i] = floatData[i] * 32767;
+    processor.onaudioprocess = (e) => {
+      const floatData = e.inputBuffer.getChannelData(0);
+      const int16Data = new Int16Array(floatData.length);
+      let maxVolume = 0;
+
+      for (let i = 0; i < floatData.length; i++) {
+        int16Data[i] = floatData[i] * 32767;
+        if (Math.abs(floatData[i]) > maxVolume) maxVolume = Math.abs(floatData[i]);
+      }
+
+      rec.acceptWaveform(int16Data);
+
+      const result = rec.partialResult();
+      if (result && result.partial) {
+        output.textContent = result.partial;
+      }
+
+      // --- Silence detection ---
+      if (maxVolume < silenceThreshold) {
+        if (silenceStart === null) silenceStart = Date.now();
+        else if (Date.now() - silenceStart > silenceTime) {
+          stopRecording(); // Auto-stop after silence
         }
-        rec.acceptWaveform(int16Data);
-        const result = rec.partialResult();
-        if (result && result.partial) {
-          output.textContent = result.partial;
-        }
-      };
-    }
+      } else {
+        silenceStart = null; // Reset if sound detected
+      }
+    };
   };
+
+  function stopRecording() {
+    if (processor) processor.disconnect();
+    if (audioContext) audioContext.close();
+    if (micStream) micStream.getTracks().forEach(track => track.stop());
+
+    const final = rec.finalResult();
+    if (final && final.text) output.textContent = final.text;
+    console.log("Final transcript:", final.text);
+
+    startBtn.disabled = false; // Re-enable start button if needed
+  }
 })();
+
   </script>
 
   <script src="script.js"></script>
