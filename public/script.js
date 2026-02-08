@@ -12,13 +12,14 @@ const gifImg = document.getElementById("gif");
 const att = document.getElementById("att");
 const similiar = document.getElementById("similiar")
 
-async function getSynonyms(word) {
-  const res = await fetch(
-    `https://api.datamuse.com/words?rel_syn=${word}`
-  );
-  const data = await res.json();
-  return data.map(item => item.word);
+function getSynonyms(word, callback) {
+  fetch(`https://api.datamuse.com/words?rel_syn=${word}`)
+    .then(res => res.json())
+    .then(data => {
+      callback(data.map(item => item.word));
+    });
 }
+
 
 function isMobileDevice() {
       return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -99,9 +100,9 @@ button.addEventListener("click", async () => {
   
   output.textContent = "Making...";
 
-  sim_words = "Similiar : " + getSynonyms(input.value);
-
-  similiar.textContent = sim_words;
+  getSynonyms(input.value, synonyms => {
+    similiar.textContent = "Similiar" + synonyms
+  });
   try {
     const res = await fetch("/.netlify/functions/groq", {
       method: "POST",
