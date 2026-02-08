@@ -205,13 +205,13 @@
   </script>
 
   <script>
-const output = document.getElementById("prompt");
+const display = document.getElementById("prompt");
 
 // Use proper vendor prefix
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 if (!SpeechRecognition) {
-  output.textContent = "Your browser does not support Web Speech API";
+  display.textContent = "Your browser does not support Web Speech API";
 } else {
   const recognition = new SpeechRecognition();
   recognition.lang = 'en-US';
@@ -224,23 +224,23 @@ if (!SpeechRecognition) {
     for (let i = event.resultIndex; i < event.results.length; i++) {
       transcript += event.results[i][0].transcript;
     }
-    output.textContent = transcript;
+    display.textContent = transcript;
   };
 
   recognition.onerror = (event) => {
     console.error("Speech recognition error:", event.error);
-    output.textContent = "Error: " + event.error;
+    display.textContent = "Error: " + event.error;
   };
 
   recognition.onend = () => {
     console.log("Recognition ended");
-    output.textContent += " [Stopped]";
+    display.textContent += " [Stopped]";
   };
 
   document.getElementById("startBtn").onclick = () => {
     try {
       recognition.start();
-      output.textContent = "Listening…";
+      display.textContent = "Listening…";
     } catch (err) {
       console.error("Start error:", err);
     }
