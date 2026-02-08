@@ -12,6 +12,7 @@
   "type": "commonjs",
   "dependencies": {
     "@deepgram/sdk": "^4.11.3",
+    "@heyputer/puter.js": "^2.2.8",
     "dotenv": "^17.2.3",
     "groq-sdk": "^0.37.0"
   }

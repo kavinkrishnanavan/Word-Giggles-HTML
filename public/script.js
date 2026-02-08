@@ -60,6 +60,20 @@ speakjoke.addEventListener('click', async function() {
     } finally {
         // Do Nothing
     }
+    const speechSynth = window.speechSynthesis;
+    const enteredText = text;
+    
+    if (!speechSynth.speaking && enteredText.trim().length) {
+        error.textContent = "";
+        const newUtter =
+            new SpeechSynthesisUtterance(enteredText);
+        speechSynth.speak(newUtter);
+        convertBtn.textContent = "Sound is Playing..."
+    }
+    
+    setTimeout(() => {
+        convertBtn.textContent = "Play Converted Sound"
+    }, 5000);
 });
 
 speakmeaning.addEventListener('click', async function() {
