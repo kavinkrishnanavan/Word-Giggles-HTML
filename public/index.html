@@ -31,7 +31,7 @@
       font-family: Arial, sans-serif;
       max-width: 800px;
       margin: auto;
-      padding: 10px;
+      padding: 20px;
       background-color: var(--bg-color);
       color: var(--text-color);
       transition: background-color 0.3s, color 0.3s;
@@ -168,6 +168,14 @@
 
   <br>
 
+  <div class="header">
+
+    <h2 id="st" style="text-decoration: underline;"></h2>
+    <button id="speaksentence" class="speak" style="display: none;"><img id="speakerimg" src="speaker.png" alt="Click me"></button>
+
+  </div>
+  <h4 id="sentence"></h4>
+
   <video id="mgif" style="border-radius: 10%; height: 300px; margin-left: 4%;" autoplay muted loop playsinline></video>
   <br>
 
@@ -212,7 +220,7 @@
         
         gcomputer.id = "att";
         mobile.id = "mgif";
-        body.style = "overflow: hidden;";
+        
       }
     }
 

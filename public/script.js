@@ -4,9 +4,11 @@ const word = document.getElementById("word");
 const meaning = document.getElementById("meaning");
 const one = document.getElementById("joke1");
 const two = document.getElementById("joke2");
+const sentence = document.getElementById("sentence")
 const wt = document.getElementById("wt");
 const mt = document.getElementById("mt");
 const jt = document.getElementById("jt");
+const st = document.getElementById("st");
 const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
 const att = document.getElementById("att");
@@ -106,7 +108,7 @@ button.addEventListener("click", async () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        prompt: "You are a childrens Joke Maker AI. Your Job is to create a joke for the word entered. If the word doesn't exist, tell this Wrong Word. The format I want the answered to be returned is in a list which is [word , meaning of word , joke] (only if the word has a correct spelling). Remember to return it in a proper list with the things inside it being a string and the meaning should be short and concise in less 12 words. Here is the word : " + input.value
+        prompt: "You are a childrens Joke Maker AI. Your Job is to create a joke for the word entered. If the word doesn't exist, tell this Wrong Word. The format I want the answered to be returned is in a list which is [word , meaning of word , joke , an short example sentence] (only if the word has a correct spelling). Remember to return it in a proper list with the things inside it being a string and the meaning should be short and concise in less 12 words. Here is the word : " + input.value
       }) 
     });
 
@@ -122,14 +124,17 @@ button.addEventListener("click", async () => {
     output.textContent = "";
     word.textContent = capitalize(answer[0]);
     meaning.textContent = capitalize(answer[1]);
+    
 
     const joke = answer[2].match(/[^.!?]+[.!?]/g);
     one.textContent = capitalize(joke[0].trim());
     two.textContent = capitalize(joke[1].trim());
+    sentence.textContent = capitalize(answer[3])
 
     wt.textContent = "Word";
     mt.textContent = "Meaning";
     jt.textContent = "Joke";
+    st.textContent = "Sentence";
 
     getSynonyms(input.value, synonyms => {
       similiar.textContent = "Similiar : " + synonyms[0] + " | " + synonyms[1] + " | " + synonyms[2];
