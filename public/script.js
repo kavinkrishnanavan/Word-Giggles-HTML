@@ -42,21 +42,19 @@ speakjoke.addEventListener('click', async function() {
     const speechSynth = window.speechSynthesis;
     const enteredText = text;
     
-    
+    if (!speechSynth.speaking && enteredText.trim().length) {
         
-    const newUtter = new SpeechSynthesisUtterance(enteredText);
-    newUtter.onend = () => {
-      speechSynthesis.cancel(); // 🔑 forces audio release
-    };
-    speechSynth.speak(newUtter);
+        const newUtter =
+            new SpeechSynthesisUtterance(enteredText);
+        speechSynth.speak(newUtter);
         
-    
+    }
     
 });
 
 speakmeaning.addEventListener('click', async function() {
 
-    if (!meaning.textContent) return;
+    
 
     const text = meaning.textContent;
 
@@ -74,7 +72,7 @@ speakmeaning.addEventListener('click', async function() {
 
 speakword.addEventListener('click', async function() {
 
-    if (!word.textContent) return;
+    
 
     const text = word.textContent;
 
