@@ -251,7 +251,7 @@ async function startRecognition() {
 
 function stopRecognition() {
   if (transferer) transferer.port.close();
-  if (micNode) micNode.disconnect();
+  if (micNode) stream.getTracks().forEach(track => track.stop());
   startBtn.disabled = false;
 }
 
