@@ -200,13 +200,17 @@
       if (isMobileDevice()) {
         console.log("Mobile Layout");
         mobile.id = "gif";
+        gcomputer.style = "display:none;";
         gmobile.style = "display:none;";
+        gmobile.id = "att";
         computer.id = "cgif";
         body.style = "transform: scale(1.8); transform-origin: top left; overflow-x: hidden;";
       } else {
         console.log("Desktop Layout");
         computer.id = "gif";
         gcomputer.style = "display:none;";
+        gmobile.style = "display:none;";
+        gcomputer.id = "att";
         mobile.id = "mgif";
         body.style = "overflow: hidden;";
       }

@@ -9,7 +9,7 @@ const mt = document.getElementById("mt");
 const jt = document.getElementById("jt");
 const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
-
+const att = document.getElementById("att");
 
 
 function isMobileDevice() {
@@ -53,8 +53,6 @@ speakjoke.addEventListener('click', async function() {
 });
 
 speakmeaning.addEventListener('click', async function() {
-
-    
 
     const text = meaning.textContent;
 
@@ -129,6 +127,8 @@ button.addEventListener("click", async () => {
 
     speakmeaning.style.display = "block";
     speakjoke.style.display = "block";
+
+    att.style.display = "block";
 
     if (!query) return;
 
