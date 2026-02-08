@@ -229,7 +229,7 @@ function getRMS(samples) {
 // Main function
 async function startRecognition() {
   startBtn.disabled = true;
-  display.textContent = "Initializing...";
+  display.value = "Initializing...";
 
   try {
     // Create AudioContext
@@ -254,12 +254,12 @@ async function startRecognition() {
 
     // Partial results
     recognizer.addEventListener("partialResult", (ev) => {
-      display.textContent = "Partial: " + ev.detail;
+      display.value = "Partial: " + ev.detail;
     });
 
     // Final results
     recognizer.addEventListener("result", (ev) => {
-      display.textContent = "Final: " + ev.detail;
+      display.value = "Final: " + ev.detail;
     });
 
     // Create transferer
@@ -275,12 +275,15 @@ async function startRecognition() {
         lastSoundTime = Date.now(); // reset silence timer
       } else {
         if (Date.now() - lastSoundTime > SILENCE_TIMEOUT) {
-          // Silence detected → stop
-          recognizer.stop();
-          transferer.port.close();
-          micNode.disconnect();
-          output.textContent += " [Stopped due to silence]";
-          startBtn.disabled = false;
+          console.log("Silence detected, stopping...");
+
+          // Stop recognition properly
+          transferer.port.close();   // stop audio transfer
+          micNode.disconnect();      // disconnect mic
+          recognizer.free();         // release WASM memory
+
+          display.value += " [Stopped due to silence]";
+          startBtn.disabled = false; // allow restart
         }
       }
     };
@@ -288,16 +291,17 @@ async function startRecognition() {
     // Connect mic to transferer
     micNode.connect(transferer);
 
-    display.textContent = "Listening...";
+    display.value = "Listening...";
   } catch (err) {
     console.error("Vosklet error:", err);
-    display.textContent = "Error: " + err;
+    display.value = "Error: " + err;
     startBtn.disabled = false;
   }
 }
 
 // Attach to button
 startBtn.onclick = startRecognition;
+
   </script>
 
   <script src="script.js"></script>
