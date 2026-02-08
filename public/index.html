@@ -205,19 +205,47 @@
   </script>
 
   <script>
-const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-recognition.lang = 'en-US';
-recognition.interimResults = true;
+const output = document.getElementById("prompt");
 
-recognition.onresult = (event) => {
-  let text = '';
-  for (let i = event.resultIndex; i < event.results.length; i++) {
-    text += event.results[i][0].transcript;
-  }
-  console.log("Transcript:", text);
-};
+// Use proper vendor prefix
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-recognition.start();
+if (!SpeechRecognition) {
+  output.textContent = "Your browser does not support Web Speech API";
+} else {
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'en-US';
+  recognition.interimResults = true; // get partial results
+  recognition.maxAlternatives = 1;
+
+  // Triggered when speech is detected
+  recognition.onresult = (event) => {
+    let transcript = '';
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      transcript += event.results[i][0].transcript;
+    }
+    output.textContent = transcript;
+  };
+
+  recognition.onerror = (event) => {
+    console.error("Speech recognition error:", event.error);
+    output.textContent = "Error: " + event.error;
+  };
+
+  recognition.onend = () => {
+    console.log("Recognition ended");
+    output.textContent += " [Stopped]";
+  };
+
+  document.getElementById("startBtn").onclick = () => {
+    try {
+      recognition.start();
+      output.textContent = "Listening…";
+    } catch (err) {
+      console.error("Start error:", err);
+    }
+  };
+}
   </script>
 
   <script src="script.js"></script>
