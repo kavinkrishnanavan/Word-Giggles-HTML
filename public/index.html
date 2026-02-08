@@ -128,8 +128,8 @@
 
   </div>
 
-  <button id="startBtn">Start Listening</button>
-  <p id="output">Waiting...</p>
+  <button id="startBtn">🎙️</button>
+  
 
   <pre id="output"></pre>
   
@@ -215,6 +215,13 @@ let micNode;
 let micStream;
 
 async function startRecognition() {
+  const module = await loadVosklet();
+
+  const model = await module.createModel(
+    "https://ccoreilly.github.io/vosk-browser/models/vosk-model-small-en-us-0.15.tar.gz",
+    "English",
+    "vosk-model-small-en-us-0.15"
+  );
   startBtn.disabled = true;
   
 
@@ -224,13 +231,7 @@ async function startRecognition() {
   micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
   micNode = ctx.createMediaStreamSource(micStream);
 
-  const module = await loadVosklet();
-
-  const model = await module.createModel(
-    "https://ccoreilly.github.io/vosk-browser/models/vosk-model-small-en-us-0.15.tar.gz",
-    "English",
-    "vosk-model-small-en-us-0.15"
-  );
+  
 
   recognizer = await module.createRecognizer(model, ctx.sampleRate);
 
