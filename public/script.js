@@ -100,9 +100,7 @@ button.addEventListener("click", async () => {
   
   output.textContent = "Making...";
 
-  getSynonyms(input.value, synonyms => {
-    similiar.textContent = "Similiar : " + synonyms[0] + " | " + synonyms[1] + " | " + synonyms[2];
-  });
+  
   try {
     const res = await fetch("/.netlify/functions/groq", {
       method: "POST",
@@ -132,6 +130,10 @@ button.addEventListener("click", async () => {
     wt.textContent = "Word";
     mt.textContent = "Meaning";
     jt.textContent = "Joke";
+
+    getSynonyms(input.value, synonyms => {
+      similiar.textContent = "Similiar : " + synonyms[0] + " | " + synonyms[1] + " | " + synonyms[2];
+    });
 
     const query = input.value.trim().toLowerCase();
     speakword.style.display = "block";
