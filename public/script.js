@@ -30,6 +30,7 @@ function isMobileDevice() {
 const speakword = document.getElementById("speakword")
 const speakmeaning = document.getElementById("speakmeaning")
 const speakjoke = document.getElementById("speakjoke")
+const speaksentence = document.getElementById("speaksentence")
 const Gifs = {
   prerequisite: "https://media1.tenor.com/m/-koXelHpdokAAAAd/before-we-begin-emma.gif",
   modesty: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTdxbGYzemxkMzg5MGs0b2NleXFvd3BoemExZTRhcnRrNmYwdWM2NSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qN9KLSKynX1bNqNzFY/giphy.gif",
@@ -46,6 +47,22 @@ const audio = document.getElementById("audio");
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
+
+speaksentence.addEventListener('click', async function() {
+
+    const text = sentence.textContent;
+    const speechSynth = window.speechSynthesis;
+    const enteredText = text;
+    
+    if (!speechSynth.speaking && enteredText.trim().length) {
+        
+        const newUtter =
+            new SpeechSynthesisUtterance(enteredText);
+        speechSynth.speak(newUtter);
+        
+    }
+    
+});
 
 speakjoke.addEventListener('click', async function() {
 
