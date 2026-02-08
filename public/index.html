@@ -161,8 +161,8 @@
   <br>
 
   <video id="mgif" style="border-radius: 10%; height: 300px; margin-left: 4%;" autoplay muted loop playsinline></video>
-  <script src="https://unpkg.com/vosk-browser/dist/worker.js"></script>
-  <script src="https://unpkg.com/vosk-browser/dist/vosk.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/msqr1/Vosklet@1.2.1/Examples/Vosklet.js"></script>
+  
 
   <script>
 
@@ -205,74 +205,66 @@
   </script>
 
   <script>
-(async () => {
-  const sampleRate = 16000;
-  const modelPath = "./models/vosk-model-small-en-us-0.15/"; // Local path
-  const model = await Vosk.createModel(modelPath);
-  const rec = new model.Recognizer({ sampleRate });
+const startBtn = document.getElementById("startBtn");
+      const output = document.getElementById("prompt");
 
-  const output = document.getElementById("prompt");
-  const startBtn = document.getElementById("startBtn");
+      async function startSpeechRecognition() {
+        try {
+          // Create an audio context
+          const ctx = new AudioContext({ sinkId: { type: "none" } });
 
-  let micStream;
-  let audioContext;
-  let processor;
+          // Get microphone
+          const micStream = await navigator.mediaDevices.getUserMedia({
+            audio: {
+              echoCancellation: true,
+              noiseSuppression: true,
+              channelCount: 1,
+            },
+          });
 
-  let silenceStart = null;        // Track when silence started
-  const silenceThreshold = 0.01;  // Volume threshold to detect silence
-  const silenceTime = 1500;       // 1.5 seconds of silence
+          // Create a media source from mic
+          const micNode = ctx.createMediaStreamSource(micStream);
 
-  startBtn.onclick = async () => {
-    micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    audioContext = new AudioContext({ sampleRate });
-    const source = audioContext.createMediaStreamSource(micStream);
+          // Load Vosklet module
+          const module = await loadVosklet();
 
-    processor = audioContext.createScriptProcessor(4096, 1, 1);
-    source.connect(processor);
-    processor.connect(audioContext.destination);
+          // Load a model (hosted model URL)
+          const model = await module.createModel(
+            "https://ccoreilly.github.io/vosk-browser/models/vosk-model-small-en-us-0.15.tar.gz",
+            "English",
+            "vosk-model-small-en-us-0.15"
+          );
 
-    processor.onaudioprocess = (e) => {
-      const floatData = e.inputBuffer.getChannelData(0);
-      const int16Data = new Int16Array(floatData.length);
-      let maxVolume = 0;
+          // Create recognizer with the audio sample rate
+          const recognizer = await module.createRecognizer(
+            model,
+            ctx.sampleRate
+          );
 
-      for (let i = 0; i < floatData.length; i++) {
-        int16Data[i] = floatData[i] * 32767;
-        if (Math.abs(floatData[i]) > maxVolume) maxVolume = Math.abs(floatData[i]);
-      }
+          // Listen for partial transcript events
+          recognizer.addEventListener("partialResult", (ev) => {
+            output.textContent = "Partial: " + ev.detail;
+          });
 
-      rec.acceptWaveform(int16Data);
+          // Listen for final transcript events
+          recognizer.addEventListener("result", (ev) => {
+            output.textContent = "Final: " + ev.detail;
+          });
 
-      const result = rec.partialResult();
-      if (result && result.partial) {
-        output.textContent = result.partial;
-      }
+          // Create a transferer and hook audio into it
+          const transferer = await module.createTransferer(ctx, 128 * 150);
 
-      // --- Silence detection ---
-      if (maxVolume < silenceThreshold) {
-        if (silenceStart === null) silenceStart = Date.now();
-        else if (Date.now() - silenceStart > silenceTime) {
-          stopRecording(); // Auto-stop after silence
+          transferer.port.onmessage = (ev) => {
+            recognizer.acceptWaveform(ev.data);
+          };
+
+          micNode.connect(transferer);
+        } catch (err) {
+          console.error("Vosklet error:", err);
         }
-      } else {
-        silenceStart = null; // Reset if sound detected
       }
-    };
-  };
 
-  function stopRecording() {
-    if (processor) processor.disconnect();
-    if (audioContext) audioContext.close();
-    if (micStream) micStream.getTracks().forEach(track => track.stop());
-
-    const final = rec.finalResult();
-    if (final && final.text) output.textContent = final.text;
-    console.log("Final transcript:", final.text);
-
-    startBtn.disabled = false; // Re-enable start button if needed
-  }
-})();
-
+      startBtn.onclick = startSpeechRecognition;
   </script>
 
   <script src="script.js"></script>
