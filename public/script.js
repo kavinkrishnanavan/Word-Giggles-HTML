@@ -42,13 +42,13 @@ speakjoke.addEventListener('click', async function() {
     const speechSynth = window.speechSynthesis;
     const enteredText = text;
     
-    if (!speechSynth.speaking && enteredText.trim().length) {
+    
         
-        const newUtter =
-            new SpeechSynthesisUtterance(enteredText);
-        speechSynth.speak(newUtter);
+    const newUtter =
+      new SpeechSynthesisUtterance(enteredText);
+    speechSynth.speak(newUtter);
         
-    }
+    
     
 });
 
