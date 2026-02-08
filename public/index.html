@@ -205,14 +205,8 @@
     window.addEventListener("resize", setLayout);
   </script>
 
-
-
-
-
-
-
   <script>
-const output = document.getElementById("output");
+const display = document.getElementById("prompt");
 const startBtn = document.getElementById("startBtn");
 
 let recognizer;
@@ -222,7 +216,7 @@ let micStream;
 
 async function startRecognition() {
   startBtn.disabled = true;
-  output.textContent = "Listening…";
+  
 
   const ctx = new AudioContext();
 
@@ -244,7 +238,7 @@ async function startRecognition() {
   recognizer.addEventListener("result", (ev) => {
     const text = ev.detail.trim();
     if (text) {
-      output.textContent = "Detected: " + text;
+      display.value = text;
       stopRecognition();
     }
   });
