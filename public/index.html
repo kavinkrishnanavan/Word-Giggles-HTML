@@ -205,7 +205,6 @@
   </script>
 
   <script>
-// Grab output element
 const display = document.getElementById("prompt");
 const startBtn = document.getElementById("startBtn");
 
@@ -232,7 +231,6 @@ async function startRecognition() {
   display.value = "Initializing...";
 
   try {
-    // Create AudioContext
     const ctx = new AudioContext();
 
     // Get microphone
@@ -277,10 +275,9 @@ async function startRecognition() {
         if (Date.now() - lastSoundTime > SILENCE_TIMEOUT) {
           console.log("Silence detected, stopping...");
 
-          // Stop recognition properly
-          transferer.port.close();   // stop audio transfer
+          // Stop recognition correctly
+          transferer.port.close();   // stop sending audio
           micNode.disconnect();      // disconnect mic
-          recognizer.free();         // release WASM memory
 
           display.value += " [Stopped due to silence]";
           startBtn.disabled = false; // allow restart
@@ -301,6 +298,7 @@ async function startRecognition() {
 
 // Attach to button
 startBtn.onclick = startRecognition;
+
 
   </script>
 
