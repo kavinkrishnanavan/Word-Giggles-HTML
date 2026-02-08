@@ -99,7 +99,7 @@ button.addEventListener("click", async () => {
   
   output.textContent = "Making...";
 
-  sim_words = "Similiar : " + getSynonyms(input.value)[0] + " | " + getSynonyms(input.value)[1] + " | " + getSynonyms(input.value)[2];
+  sim_words = "Similiar : " + getSynonyms(input.value);
 
   similiar.textContent = sim_words;
   try {
