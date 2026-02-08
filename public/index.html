@@ -161,6 +161,8 @@
   <br>
 
   <video id="mgif" style="border-radius: 10%; height: 300px; margin-left: 4%;" autoplay muted loop playsinline></video>
+  <script src="https://unpkg.com/vosk-browser/dist/worker.js"></script>
+  <script src="https://unpkg.com/vosk-browser/dist/vosk.js"></script>
 
   <script>
 
@@ -203,40 +205,43 @@
   </script>
 
   <script>
-  // Check if browser supports SpeechRecognition
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+(async () => {
+  const sampleRate = 16000;
+  const modelUrl = "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip";
 
-  if (!SpeechRecognition) {
-    alert("Your browser does not support Speech Recognition.");
-  } else {
-    const recognition = new SpeechRecognition();
-    recognition.lang = 'en-US'; // Set language
-    recognition.interimResults = true; // Show partial results
-    recognition.continuous = false; // Stop automatically after speech
+  const model = await Vosk.createModel(modelUrl); // loads model
+  const rec = new model.Recognizer({ sampleRate });
 
-    const output = document.getElementById("prompt");
-    const startBtn = document.getElementById("startBtn");
+  const output = document.getElementById("prompt");
+  const startBtn = document.getElementById("startBtn");
 
-    startBtn.addEventListener("click", () => {
-      recognition.start();
-    });
+  let micStream;
 
-    recognition.onresult = (event) => {
-      let transcript = '';
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        transcript += event.results[i][0].transcript;
-      }
-      output.textContent = transcript;
-    };
+  startBtn.onclick = async () => {
+    if (!micStream) {
+      micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const audioContext = new AudioContext({ sampleRate });
+      const source = audioContext.createMediaStreamSource(micStream);
+      const processor = audioContext.createScriptProcessor(4096, 1, 1);
 
-    recognition.onerror = (event) => {
-      console.error("Error occurred in recognition: " + event.error);
-    };
+      source.connect(processor);
+      processor.connect(audioContext.destination);
 
-    recognition.onend = () => {
-      console.log("Speech recognition ended.");
-    };
-  }
+      processor.onaudioprocess = (e) => {
+        const floatData = e.inputBuffer.getChannelData(0);
+        const int16Data = new Int16Array(floatData.length);
+        for (let i = 0; i < floatData.length; i++) {
+          int16Data[i] = floatData[i] * 32767;
+        }
+        rec.acceptWaveform(int16Data);
+        const result = rec.partialResult();
+        if (result && result.partial) {
+          output.textContent = result.partial;
+        }
+      };
+    }
+  };
+})();
   </script>
 
   <script src="script.js"></script>
