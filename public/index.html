@@ -205,6 +205,12 @@
     window.addEventListener("resize", setLayout);
   </script>
 
+
+
+
+
+
+
   <script>
 const output = document.getElementById("output");
 const startBtn = document.getElementById("startBtn");
@@ -212,15 +218,17 @@ const startBtn = document.getElementById("startBtn");
 let recognizer;
 let transferer;
 let micNode;
+let micStream;
 
 async function startRecognition() {
   startBtn.disabled = true;
-  output.textContent = "Listening...";
+  output.textContent = "Listening…";
 
   const ctx = new AudioContext();
 
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  micNode = ctx.createMediaStreamSource(stream);
+  // 🎤 Get mic stream (KEEP REFERENCE!)
+  micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  micNode = ctx.createMediaStreamSource(micStream);
 
   const module = await loadVosklet();
 
@@ -232,7 +240,7 @@ async function startRecognition() {
 
   recognizer = await module.createRecognizer(model, ctx.sampleRate);
 
-  // 🔴 THIS is where real words appear
+  // ✅ Stop immediately on first real result
   recognizer.addEventListener("result", (ev) => {
     const text = ev.detail.trim();
     if (text) {
@@ -250,12 +258,20 @@ async function startRecognition() {
 }
 
 function stopRecognition() {
+  // 🔴 Stop audio pipeline
   if (transferer) transferer.port.close();
-  if (micNode) stream.getTracks().forEach(track => track.stop());
+  if (micNode) micNode.disconnect();
+
+  // 🔴 ACTUALLY stop the mic hardware
+  if (micStream) {
+    micStream.getTracks().forEach(track => track.stop());
+  }
+
   startBtn.disabled = false;
 }
 
 startBtn.onclick = startRecognition;
+
 
 
   </script>
