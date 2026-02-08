@@ -44,9 +44,8 @@ speakjoke.addEventListener('click', async function() {
     
     
         
-    const newUtter =
-      new SpeechSynthesisUtterance(enteredText);
-    utterance.onend = () => {
+    const newUtter = new SpeechSynthesisUtterance(enteredText);
+    newUtter.onend = () => {
       speechSynthesis.cancel(); // 🔑 forces audio release
     };
     speechSynth.speak(newUtter);
