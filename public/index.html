@@ -128,7 +128,7 @@
 
   </div>
 
-  
+  <button id="startBtn">Start Listening</button>
 
   <pre id="output"></pre>
   
@@ -202,7 +202,42 @@
     window.addEventListener("resize", setLayout);
   </script>
 
-  
+  <script>
+  // Check if browser supports SpeechRecognition
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert("Your browser does not support Speech Recognition.");
+  } else {
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US'; // Set language
+    recognition.interimResults = true; // Show partial results
+    recognition.continuous = false; // Stop automatically after speech
+
+    const output = document.getElementById("prompt");
+    const startBtn = document.getElementById("startBtn");
+
+    startBtn.addEventListener("click", () => {
+      recognition.start();
+    });
+
+    recognition.onresult = (event) => {
+      let transcript = '';
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        transcript += event.results[i][0].transcript;
+      }
+      output.textContent = transcript;
+    };
+
+    recognition.onerror = (event) => {
+      console.error("Error occurred in recognition: " + event.error);
+    };
+
+    recognition.onend = () => {
+      console.log("Speech recognition ended.");
+    };
+  }
+  </script>
 
   <script src="script.js"></script>
 
