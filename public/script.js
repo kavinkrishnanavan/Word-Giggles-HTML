@@ -162,6 +162,7 @@ button.addEventListener("click", async () => {
 
     speakmeaning.style.display = "block";
     speakjoke.style.display = "block";
+    speaksentence.style.display = "block";
 
     att.style.display = "block";
 
