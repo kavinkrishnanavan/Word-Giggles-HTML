@@ -154,7 +154,17 @@ button.addEventListener("click", async () => {
     st.textContent = "Sentence";
 
     getSynonyms(input.value, synonyms => {
-      similiar.textContent = "Similiar : " + synonyms[0] + " | " + synonyms[1] + " | " + synonyms[2];
+      let len = synonyms.length();
+
+      let fullsentence = "Similiar : " + synonyms[0]
+
+      for (let i; i < len-1; i++) {
+
+        fullsentence += fullsentence[i + 1]
+
+      }
+
+      similiar.textContent = fullsentence;
     });
 
     const query = input.value.trim().toLowerCase();
