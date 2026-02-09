@@ -13,6 +13,8 @@ const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
 const att = document.getElementById("att");
 const similiar = document.getElementById("similiar")
+const body = document.getElementById("body");
+
 
 function getSynonyms(word, callback) {
   fetch(`https://api.datamuse.com/words?rel_syn=${word}`)
@@ -119,7 +121,8 @@ button.addEventListener("click", async () => {
   
   output.textContent = "Making...";
 
-  
+  body.style.overflow = "visible";
+
   try {
     const res = await fetch("/.netlify/functions/groq", {
       method: "POST",
