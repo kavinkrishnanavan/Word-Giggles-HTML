@@ -121,7 +121,7 @@ button.addEventListener("click", async () => {
   
   output.textContent = "Making...";
 
-  body.style.overflow = "visible";
+  
 
   try {
     const res = await fetch("/.netlify/functions/groq", {
