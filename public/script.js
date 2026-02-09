@@ -13,7 +13,7 @@ const input = document.getElementById("prompt");
 const gifImg = document.getElementById("gif");
 const att = document.getElementById("att");
 const similiar = document.getElementById("similiar")
-
+const cscroll = document.getElementById("body")
 
 
 function getSynonyms(word, callback) {
@@ -121,7 +121,7 @@ button.addEventListener("click", async () => {
   
   output.textContent = "Making...";
 
-  
+  cscroll.style.overflow = "visible";
 
   try {
     const res = await fetch("/.netlify/functions/groq", {
