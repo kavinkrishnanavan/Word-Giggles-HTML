@@ -158,7 +158,7 @@ button.addEventListener("click", async () => {
 
     getSynonyms(input.value, synonyms => {
       
-      similiar.textContent = 'Similiar words : ' + synonyms.join(" | ");;
+      similiar.textContent = 'Similiar words : ' + synonyms.slice(0, 5).join(" | ");
     });
 
     const query = input.value.trim().toLowerCase();
