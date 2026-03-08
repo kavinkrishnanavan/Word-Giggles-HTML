@@ -212,7 +212,6 @@ button.addEventListener("click", async () => {
             console.log("Preloaded gif")
             gifImg.style = "border-radius: 10%; height: 300px; margin-left: 4%; box-shadow: 0 0 5px rgb(72, 0, 255), 0 0 15px #007bff, inset 0 0 10px #007bff;";
             gifImg.style.display = "block";
-            document.getElementById("matt").style.display = "block";
 
       } else {
 
@@ -220,13 +219,10 @@ button.addEventListener("click", async () => {
             console.log("Preloaded Gif")
             gifImg.style="border-radius: 10%; height: 300px; margin-left: 45%; margin-top: 22.5%;  position: absolute; box-shadow: 0 0 5px rgb(72, 0, 255), 0 0 15px #007bff, inset 0 0 10px #007bff;";
             gifImg.style.display = "block";
-            document.getElementById("catt").style.display = "block";
 
       }
     } else {
       gifImg.style.display = "none";
-      document.getElementById("catt").style.display = "none";
-      document.getElementById("matt").style.display = "none";
 
       try {
         const gifRes = await fetch("/.netlify/functions/giphy", {
@@ -246,7 +242,6 @@ button.addEventListener("click", async () => {
             console.log(gifData.gif)
             
             gifImg.style.display = "block";
-            document.getElementById("matt").style.display = "block";
 
           } else {
 
@@ -254,7 +249,6 @@ button.addEventListener("click", async () => {
             console.log(gifData.gif)
             gifImg.style="border-radius: 10%; height: 300px; margin-left: 45%; margin-top: 22.5%;  position: absolute; box-shadow: 0 0 5px rgb(72, 0, 255), 0 0 15px #007bff, inset 0 0 10px #007bff;";
             gifImg.style.display = "block";
-            document.getElementById("catt").style.display = "block";
 
           }
           
