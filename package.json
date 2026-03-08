@@ -14,6 +14,8 @@
     "@deepgram/sdk": "^4.11.3",
     "@heyputer/puter.js": "^2.2.8",
     "dotenv": "^17.2.3",
+    "firebase": "^12.10.0",
+    "firebase-admin": "^13.7.0",
     "groq-sdk": "^0.37.0"
   }
 }
