@@ -36,6 +36,7 @@ document.getElementById("sendBtn").addEventListener("click", async () => {
       body: JSON.stringify({ value: wordtext }),
     });
     const text = await res.text();
+    alert("Reported : " + wordtext);
     
   } catch (err) {
     console.error(err);
