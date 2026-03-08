@@ -27,12 +27,12 @@ function getSynonyms(word, callback) {
 
 
 document.getElementById("sendBtn").addEventListener("click", async () => {
-  const text = word.textContent;
+  const wordtext = word.textContent;
   console.log(word.textContent);
   try {
     const res = await fetch("/.netlify/functions/sendToFirebase", {
       method: "POST",
-      body: JSON.stringify({ value: text }),
+      body: JSON.stringify({ value: wordtext }),
     });
     const text = await res.text();
     
