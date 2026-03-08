@@ -141,6 +141,7 @@
   <div class="header">
     <img id="logo" src="logo.png" alt="Logo">
     <h1 id="title">𝐖𝐨𝐫𝐝 𝐆𝐢𝐠𝐠𝐥𝐞𝐬</h1>
+    <p id="commit-count">Loading...</p>
   </div>
 
   <div class="header">
@@ -321,6 +322,37 @@ startBtn.onclick = startRecognition;
 
 
 
+  </script>
+
+    <script>
+    const owner = "kavinkrishnanavan";  // repo owner
+    const repo  = "Word-Giggles-HTML";  // repo name
+
+    async function showCommitCount() {
+      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`;
+
+      try {
+        const response = await fetch(apiUrl);
+
+        // Check for pagination header
+        const link = response.headers.get("Link");
+        if (link) {
+          const match = link.match(/&page=(\d+)>; rel="last"/);
+          if (match) {
+            document.getElementById("commit-count").textContent = "Version " + parseInt(match[1]) / 100;
+            return;
+          }
+        }
+
+        // Fallback if no Link header
+        const commits = await response.json();
+        document.getElementById("commit-count").textContent = "Version " + parseInt(commits.length) / 100;
+      } catch (err) {
+        document.getElementById("commit-count").textContent = "Version (Error)";
+      }
+    }
+
+    showCommitCount();
   </script>
 
   <script src="script.js"></script>
