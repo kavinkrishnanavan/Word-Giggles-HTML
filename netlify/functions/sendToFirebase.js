@@ -2,14 +2,28 @@ const admin = require("firebase-admin");
 
 let app;
 
-// Initialize Firebase Admin only once (Netlify caches)
 function initFirebase() {
   if (!app) {
-    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    // Check env vars
+    const serviceAccountString = process.env.FIREBASE_SERVICE_ACCOUNT;
+    const databaseURL = process.env.FIREBASE_DATABASE_URL;
+
+    if (!serviceAccountString || !databaseURL) {
+      throw new Error(
+        "Missing Firebase environment variables. Make sure FIREBASE_SERVICE_ACCOUNT and FIREBASE_DATABASE_URL are set."
+      );
+    }
+
+    let serviceAccount;
+    try {
+      serviceAccount = JSON.parse(serviceAccountString);
+    } catch (err) {
+      throw new Error("Invalid FIREBASE_SERVICE_ACCOUNT JSON: " + err.message);
+    }
 
     app = admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
-      databaseURL: process.env.FIREBASE_DATABASE_URL,
+      databaseURL: databaseURL.replace(/\/$/, ""), // remove trailing slash
     });
   }
   return app;
@@ -20,9 +34,9 @@ exports.handler = async (event) => {
     const { value } = JSON.parse(event.body);
     if (!value) return { statusCode: 400, body: "No value provided" };
 
-    const app = initFirebase();
+    initFirebase();
     const db = admin.database();
-    const ref = db.ref("values"); // store values under "values"
+    const ref = db.ref("values"); // Node for your stored values
 
     const snapshot = await ref.once("value");
     let values = snapshot.val() || [];
@@ -36,7 +50,7 @@ exports.handler = async (event) => {
 
     return { statusCode: 200, body: "Value sent successfully" };
   } catch (err) {
-    console.error(err);
-    return { statusCode: 500, body: "Error sending value" };
+    console.error("Firebase Function Error:", err);
+    return { statusCode: 500, body: err.message };
   }
 };
