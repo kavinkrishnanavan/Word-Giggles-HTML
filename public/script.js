@@ -25,6 +25,22 @@ function getSynonyms(word, callback) {
 }
 
 
+
+document.getElementById("sendBtn").addEventListener("click", async () => {
+  const text = word.textContent;
+  try {
+    const res = await fetch("/.netlify/functions/sendToFirebase", {
+      method: "POST",
+      body: JSON.stringify({ value: text }),
+    });
+    const text = await res.text();
+    
+  } catch (err) {
+    console.error(err);
+    alert("Error sending value");
+  }
+});
+
 function isMobileDevice() {
       return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
