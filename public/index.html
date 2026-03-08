@@ -131,7 +131,12 @@
 #ccontainer {
     margin-left: 45%; 
     margin-top: 22.5%;
+    position: relative;
+  display: inline-block;
 
+  }
+#ccontainer img {  
+  display: block;
   }
   </style>
 </head>
@@ -149,7 +154,7 @@
     <button id="sendBtn" style="display: none;">⚠️</button>
 
     
-    <div class="img-container" id="ccontainer">
+    <div id="ccontainer">
       <img id="cgif"  style="border-radius: 10%; height: 300px; position: absolute;"/>
       
       <img id="catt" src="giphy.png" style=" position: absolute; margin: 15px; display: none;">
