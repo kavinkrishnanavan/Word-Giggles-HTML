@@ -36,7 +36,7 @@ exports.handler = async (event) => {
 
     initFirebase();
     const db = admin.database();
-    const ref = db.ref("values"); // Node for your stored values
+    const ref = db.ref("reported_words"); // Node for your stored values
 
     const snapshot = await ref.once("value");
     let values = snapshot.val() || [];

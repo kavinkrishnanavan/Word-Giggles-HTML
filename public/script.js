@@ -14,7 +14,7 @@ const gifImg = document.getElementById("gif");
 const att = document.getElementById("att");
 const similiar = document.getElementById("similiar")
 const cscroll = document.getElementById("body")
-
+const report = document.getElementById("sendBtn");
 
 function getSynonyms(word, callback) {
   fetch(`https://api.datamuse.com/words?rel_syn=${word}`)
@@ -27,6 +27,7 @@ function getSynonyms(word, callback) {
 
 
 document.getElementById("sendBtn").addEventListener("click", async () => {
+  
   const wordtext = word.textContent;
   console.log(word.textContent);
   try {
@@ -136,6 +137,7 @@ speakword.addEventListener('click', async function() {
 
 button.addEventListener("click", async () => {
   
+  
   output.textContent = "Making...";
 
   cscroll.style.overflow = "visible";
@@ -193,6 +195,8 @@ button.addEventListener("click", async () => {
     speaksentence.style.display = "block";
 
     att.style.display = "block";
+
+    report.style.display = "block";
 
     if (!query) return;
 
