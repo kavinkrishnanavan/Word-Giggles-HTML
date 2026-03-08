@@ -118,24 +118,6 @@
     width: 25px;
     height: 25px;
   }
-
-  .media-wrap {
-    position: relative;
-    display: inline-block;
-  }
-
-  .wm-label {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 12px;
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.45);
-    pointer-events: none;
-    z-index: 2;
-  }
   
   </style>
 </head>
@@ -151,9 +133,9 @@
     <button id="askBtn">Make</button>
     <button id="startBtn">🎙️</button>
     <button id="sendBtn" style="display: none;">⚠️</button>
-    <div style="margin-left: 45%; margin-top: 22.5%;  position: absolute;" class="media-wrap">
-      <img id="cgif" style="border-radius: 10%; height: 300px;"/>
-      <div class="wm-label">WordGiggles</div>
+    <div style="margin-left: 45%; margin-top: 22.5%;  position: absolute;">
+
+      <img id="cgif" style="border-radius: 10%; height: 300px; "/>
       <img id="catt" src="giphy.png" style="background-color: rgb(158, 158, 158); border-radius: 12.5px; display:none;">
     </div>
   </div>
@@ -197,10 +179,7 @@
   </div>
   <h4 id="sentence"></h4>
 
-  <div class="media-wrap" style="margin-left: 4%;">
-    <video id="mgif" style="border-radius: 10%; height: 300px;" autoplay muted loop playsinline></video>
-    <div class="wm-label">WordGiggles</div>
-  </div>
+  <video id="mgif" style="border-radius: 10%; height: 300px; margin-left: 4%;" autoplay muted loop playsinline></video>
   <br>
 
   <img id="matt" src="giphy.png" style="margin-left: 18%; background-color: rgb(158, 158, 158); border-radius: 12.5px; display:none;">

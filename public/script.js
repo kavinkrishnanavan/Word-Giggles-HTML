@@ -210,7 +210,7 @@ button.addEventListener("click", async () => {
         
             gifImg.src = url;
             console.log("Preloaded gif")
-            gifImg.style = "border-radius: 10%; height: 300px; box-shadow: 0 0 5px rgb(72, 0, 255), 0 0 15px #007bff, inset 0 0 10px #007bff;";
+            gifImg.style = "border-radius: 10%; height: 300px; margin-left: 4%; box-shadow: 0 0 5px rgb(72, 0, 255), 0 0 15px #007bff, inset 0 0 10px #007bff;";
             gifImg.style.display = "block";
 
       } else {
@@ -237,7 +237,7 @@ button.addEventListener("click", async () => {
           if (isMobileDevice()) {
 
             url = gifData.gif.slice(0, -3) + "mp4";
-            gifImg.style = "border-radius: 10%; height: 300px; box-shadow: 0 0 5px rgb(72, 0, 255), 0 0 15px #007bff, inset 0 0 10px #007bff;";
+            gifImg.style = "border-radius: 10%; height: 300px; margin-left: 4%; box-shadow: 0 0 5px rgb(72, 0, 255), 0 0 15px #007bff, inset 0 0 10px #007bff;";
             gifImg.src = url;
             console.log(gifData.gif)
             
