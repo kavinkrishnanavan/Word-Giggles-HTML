@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1160723486889994" crossorigin="anonymous"></script>
-  <meta name="google-adsense-account" content="ca-pub-1160723486889994">
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Word Giggles turns any word you type or say into an instant definition, a synonym, a silly joke, a fun example sentence, and a matching GIF." />
+  <meta name="google-adsense-account" content="ca-pub-1160723486889994">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1160723486889994" crossorigin="anonymous"></script>
   <title>Word Giggles</title>
   <link rel="icon" type="image/png" href="logo.png">
-  
+  <link rel="stylesheet" href="style.css">
+
   <style>
 
     :root {
@@ -96,9 +99,11 @@
       
     }
 
-    h6 {
+    .subtle-text {
       margin-left: 4%;
       font-style: italic;
+      font-weight: bold;
+      font-size: 0.85em;
       color: gray;
       max-width: 500px;
     }
@@ -117,9 +122,34 @@
     background-color: transparent;
     
   }
-  #speakerimg{
+  .speakerimg {
     width: 25px;
     height: 25px;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .intro {
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    max-width: 700px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 480px) {
+    #title {
+      font-size: 220%;
+    }
   }
 
   .img-container {
@@ -142,52 +172,75 @@
 
   </style>
 </head>
-<body id="body">
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">𝐖𝐨𝐫𝐝 𝐆𝐢𝐠𝐠𝐥𝐞𝐬</a>
+    <nav aria-label="Main navigation">
+      <ul class="site-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+  <div id="body">
   <div class="header">
-    <img id="logo" src="logo.png">
+    <img id="logo" src="logo.png" alt="Word Giggles logo">
 
     <h1 id="title">𝐖𝐨𝐫𝐝 𝐆𝐢𝐠𝐠𝐥𝐞𝐬</h1>
 
-    <h6 id="commit-count" >Version Loading...</h6>
+    <span class="subtle-text" id="commit-count">Version Loading...</span>
 
-    
+
   </div>
 
-  
+  <p class="intro">
+    Word Giggles turns any word you type or speak into an instant mini-lesson: a clear
+    definition, a similar word, a silly joke, a fun example sentence, and a matching GIF
+    to bring it to life. Type a word (or tap the microphone to say it out loud), hit
+    <strong>Make</strong>, and Word Giggles will read the results back to you if you tap
+    the speaker icons &mdash; a playful way to build vocabulary for kids and word-lovers alike.
+  </p>
 
 
   <div class="header">
 
+    <label for="prompt" class="visually-hidden">Enter a word</label>
     <input id="prompt" placeholder="Enter a word... " />
     <button id="askBtn">Make</button>
-    <button id="startBtn">🎙️</button>
-    <button id="sendBtn" style="display: none;">⚠️</button>
+    <button id="startBtn" aria-label="Speak a word using your microphone">🎙️</button>
+    <button id="sendBtn" style="display: none;" aria-label="Report a problem">⚠️</button>
 
     <br>
 
     <div class="line"></div>
-    
+
     <div class="img-container">
-      <img id="cgif" style="border-radius: 10%; height: 300px; position: absolute;"/>
-      
-      <img id="catt" src="giphy.png" style=" position: absolute; margin: 15px; display: none;">
+      <img id="cgif" style="border-radius: 10%; height: 300px; position: absolute; display: none;" alt="Animated GIF illustrating the entered word"/>
+
+      <img id="catt" src="giphy.png" style=" position: absolute; margin: 15px; display: none;" alt="">
     </div>
 
   </div>
 
 
   <pre id="output"></pre>
-  
+
   <div class="header">
     <h2 id="wt" style="text-decoration: underline;"></h2>
-    <button id="speakword" class="speak" style="display: none;"><img id="speakerimg" src="speaker.png" alt="Click me"></button>
+    <button id="speakword" class="speak" style="display: none;" aria-label="Read the word aloud"><img class="speakerimg" src="speaker.png" alt=""></button>
   </div>
   <h4 id="word"></h4>
-  <h6 id="similiar"></h6>
+  <p class="subtle-text" id="similiar"></p>
   <div class="header">
 
     <h2 id="mt" style="text-decoration: underline;"></h2>
-    <button id="speakmeaning" class="speak" style="display: none;"><img id="speakerimg" src="speaker.png" alt="Click me"></button>
+    <button id="speakmeaning" class="speak" style="display: none;" aria-label="Read the meaning aloud"><img class="speakerimg" src="speaker.png" alt=""></button>
 
   </div>
   <h4 id="meaning"></h4>
@@ -195,12 +248,12 @@
   <div class="header">
 
     <h2 id="jt" style="text-decoration: underline;"></h2>
-    <button id="speakjoke" class="speak" style="display: none;"><img id="speakerimg" src="speaker.png" alt="Click me"></button>
+    <button id="speakjoke" class="speak" style="display: none;" aria-label="Read the joke aloud"><img class="speakerimg" src="speaker.png" alt=""></button>
 
   </div>
 
   <br>
-  
+
   <h4 id="joke1"></h4>
   <h4 id="joke2"></h4>
 
@@ -209,18 +262,31 @@
   <div class="header">
 
     <h2 id="st" style="text-decoration: underline;"></h2>
-    <button id="speaksentence" class="speak" style="display: none;"><img id="speakerimg" src="speaker.png" alt="Click me"></button>
+    <button id="speaksentence" class="speak" style="display: none;" aria-label="Read the sentence aloud"><img class="speakerimg" src="speaker.png" alt=""></button>
 
   </div>
   <h4 id="sentence"></h4>
 
   <div class="img-container">
 
-    <img id="matt" src="giphy.png" style=" position: absolute; margin: 20px; display: none;">
+    <img id="matt" src="giphy.png" style=" position: absolute; margin: 20px; display: none;" alt="">
     <video id="mgif"  style="border-radius: 10%; height: 300px; position: absolute;" autoplay loop muted></video>
-      
-      
+
+
   </div>
+  </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <nav aria-label="Footer navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <p>&copy; 2026 Word Giggles. All rights reserved.</p>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/gh/msqr1/Vosklet@1.2.1/Examples/Vosklet.js"></script>
   

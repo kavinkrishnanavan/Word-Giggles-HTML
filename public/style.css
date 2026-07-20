@@ -1,0 +1,124 @@
+/* Shared site-wide styles: header nav, footer, base page layout.
+   Used by index.html, about.html, privacy.html, and contact.html. */
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --input-bg: #f0f0f0;
+  --input-text: #000000;
+  --button-bg: #007bff;
+  --button-text: #ffffff;
+  --header-color: #333333;
+  --link-color: #007bff;
+  --border-color: #dddddd;
+}
+
+body.dark {
+  --bg-color: #1e1e1e;
+  --text-color: #f0f0f0;
+  --input-bg: #333333;
+  --input-text: #ffffff;
+  --button-bg: #0d6efd;
+  --button-text: #ffffff;
+  --header-color: #f0f0f0;
+  --link-color: #6ea8fe;
+  --border-color: #444444;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.site-header .brand {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--header-color);
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav a {
+  color: var(--link-color);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.site-nav a:hover,
+.site-nav a:focus {
+  text-decoration: underline;
+}
+
+.page-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.page-content h1 {
+  color: var(--header-color);
+}
+
+.page-content section {
+  margin-bottom: 24px;
+}
+
+.site-footer {
+  border-top: 1px solid var(--border-color);
+  margin-top: 40px;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.site-footer nav {
+  margin-bottom: 8px;
+}
+
+.site-footer a {
+  color: var(--link-color);
+  text-decoration: none;
+  margin: 0 8px;
+}
+
+.site-footer a:hover,
+.site-footer a:focus {
+  text-decoration: underline;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 600px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-content {
+    padding: 16px;
+  }
+}
